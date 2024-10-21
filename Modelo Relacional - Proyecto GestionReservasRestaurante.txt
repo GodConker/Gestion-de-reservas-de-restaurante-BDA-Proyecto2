@@ -1,0 +1,38 @@
+Modelo Relacional - Proyecto GestionReservasRestaurante.
+
+Cliente (
+ID: (entero, llave primaria, no nulo, autoincrementable)
+nombre_completo: (texto(100), no nulo)
+telefono: (texto(15), no nulo))
+
+Restaurante (
+ID: (entero, llave primaria, no nulo, autoincrementable)
+nombre: (texto(100), no nulo)
+direccion: (texto(150), no nulo)
+horario_apertura: (tiempo, no nulo)
+horario_cierre: (tiempo, no nulo))
+
+Mesa (
+ID: (entero, llave primaria, no nulo, autoincrementable)
+codigo_mesa: (texto(20), no nulo)
+tipo_mesa: (ENUM('Pequeña', 'Mediana', 'Grande'), no nulo)
+capacidad: (entero, no nulo)
+ubicacion: (ENUM('Terraza', 'Ventana', 'General'), no nulo)
+id_restaurante: (Llave foránea, entero, no nulo, referencia a Restaurante.ID))
+
+Reserva (
+ID: (entero, llave primaria, no nulo, autoincrementable)
+fecha_reserva: (fecha, no nulo)
+hora_reserva: (tiempo, no nulo)
+num_personas: (entero, no nulo)
+costo: (decimal(10, 2), no nulo)
+estado_reserva: (ENUM('Activa', 'Cancelada'), por defecto 'Activa')
+multa: (decimal(10, 2), por defecto 0.00)
+id_cliente: (Llave foránea, entero, no nulo, referencia a Cliente.ID)
+id_mesa: (Llave foránea, entero, no nulo, referencia a Mesa.ID))
+
+HistorialReserva (
+ID: (entero, llave primaria, no nulo, autoincrementable)
+id_reserva: (Llave foránea, entero, no nulo, referencia a Reserva.ID)
+estado: (ENUM('Reservado', 'Cancelado'), no nulo)
+fecha_cambio_estado: (datetime, no nulo))
