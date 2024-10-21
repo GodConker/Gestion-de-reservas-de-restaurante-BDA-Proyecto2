@@ -1,0 +1,54 @@
+CREATE DATABASE IF NOT EXISTS GestionReservasRestaurante;
+USE GestionReservasRestaurante;
+
+CREATE TABLE IF NOT EXISTS Cliente (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_completo VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Restaurante (
+    id_restaurante INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    direccion VARCHAR(150) NOT NULL,
+    horario_apertura TIME NOT NULL,
+    horario_cierre TIME NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Mesa (
+    id_mesa INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_mesa VARCHAR(20) NOT NULL,
+    tipo_mesa ENUM('Pequeña', 'Mediana', 'Grande') NOT NULL,
+    capacidad INT NOT NULL,
+    ubicacion ENUM('Terraza', 'Ventana', 'General') NOT NULL,
+    id_restaurante INT NOT NULL,
+    CONSTRAINT fk_mesa_restaurante FOREIGN KEY (id_restaurante) REFERENCES Restaurante(id_restaurante)
+);
+
+CREATE TABLE IF NOT EXISTS Reserva (
+    id_reserva INT AUTO_INCREMENT PRIMARY KEY,
+    fecha_reserva DATE NOT NULL,
+    hora_reserva TIME NOT NULL,
+    num_personas INT NOT NULL,
+    costo DECIMAL(10, 2) NOT NULL,
+    estado_reserva ENUM('Activa', 'Cancelada') DEFAULT 'Activa',
+    multa DECIMAL(10, 2) DEFAULT 0.00,
+    id_cliente INT NOT NULL,
+    id_mesa INT NOT NULL,
+    CONSTRAINT fk_reserva_cliente FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
+    CONSTRAINT fk_reserva_mesa FOREIGN KEY (id_mesa) REFERENCES Mesa(id_mesa)
+);
+
+CREATE TABLE IF NOT EXISTS HistorialReserva (
+    id_historial INT AUTO_INCREMENT PRIMARY KEY,
+    id_reserva INT NOT NULL,
+    estado ENUM('Reservado', 'Cancelado') NOT NULL,
+    fecha_cambio_estado DATETIME NOT NULL,
+    CONSTRAINT fk_historial_reserva FOREIGN KEY (id_reserva) REFERENCES Reserva(id_reserva)
+);
+
+
+CREATE INDEX idx_reserva_fecha ON Reserva(fecha_reserva);
+CREATE INDEX idx_reserva_cliente ON Reserva(id_cliente);
+CREATE INDEX idx_mesa_restaurante ON Mesa(id_restaurante);
+CREATE INDEX idx_historial_reserva ON HistorialReserva(id_reserva);
