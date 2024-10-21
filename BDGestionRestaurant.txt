@@ -1,5 +1,5 @@
 CREATE DATABASE IF NOT EXISTS GestionReservasRestaurante;
-USE GestionReservasRestaurante;
+USE GestionReservasRestaurante; 
 
 CREATE TABLE IF NOT EXISTS Cliente (
     id_cliente INT AUTO_INCREMENT PRIMARY KEY,
