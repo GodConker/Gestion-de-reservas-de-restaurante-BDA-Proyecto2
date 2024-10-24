@@ -10,25 +10,25 @@ package dtos;
  */
 public class ClienteDTO {
 
-    private int idCliente;
+    private Long idCliente;
     private String nombreCompleto;
     private String telefono;
 
     public ClienteDTO() {
     }
 
-    public ClienteDTO(int idCliente, String nombreCompleto, String telefono) {
+    public ClienteDTO(Long idCliente, String nombreCompleto, String telefono) {
         this.idCliente = idCliente;
         this.nombreCompleto = nombreCompleto;
         this.telefono = telefono;
     }
 
     // Getters y Setters
-    public int getIdCliente() {
+    public Long getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(Long idCliente) {
         this.idCliente = idCliente;
     }
 

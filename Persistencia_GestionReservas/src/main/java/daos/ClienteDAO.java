@@ -33,7 +33,7 @@ public class ClienteDAO {
         }
     }
 
-    public Cliente consultarCliente(int idCliente) {
+    public Cliente consultarCliente(Long idCliente) {
         try {
             return em.find(Cliente.class, idCliente);
         } catch (Exception e) {
@@ -60,7 +60,7 @@ public class ClienteDAO {
         }
     }
 
-    public void eliminarCliente(int idCliente) {
+    public void eliminarCliente(Long idCliente) {
         try {
             em.getTransaction().begin();
             Cliente cliente = consultarCliente(idCliente);

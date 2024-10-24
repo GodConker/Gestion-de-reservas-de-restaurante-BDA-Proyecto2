@@ -3,14 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package business.objects;
+
+import daos.ClienteDAO;
+import entidades.Cliente;
+import java.util.List;
+
 /**
  *
  * @author danie
  */
 public class ClienteBO {
+    
      private ClienteDAO clienteDAO;
 
-    public ClienteService(ClienteDAO clienteDAO) {
+    public ClienteBO(ClienteDAO clienteDAO) {
         this.clienteDAO = clienteDAO;
     }
 
@@ -23,7 +29,7 @@ public class ClienteBO {
     }
 
     // Lógica para consultar un cliente por id
-    public Cliente consultarCliente(int idCliente) {
+    public Cliente consultarCliente(Long idCliente) {
         Cliente cliente = clienteDAO.consultarCliente(idCliente);
         if (cliente == null) {
             throw new RuntimeException("Cliente no encontrado");
@@ -38,14 +44,14 @@ public class ClienteBO {
 
     // Lógica para actualizar un cliente
     public void actualizarCliente(Cliente cliente) {
-        if (clienteDAO.consultarCliente(cliente.getIdCliente()) == null) {
+        if (clienteDAO.consultarCliente(cliente.getId()) == null) {
             throw new RuntimeException("Cliente no encontrado");
         }
         clienteDAO.actualizarCliente(cliente);
     }
 
     // Lógica para eliminar un cliente
-    public void eliminarCliente(int idCliente) {
+    public void eliminarCliente(Long idCliente) {
         Cliente cliente = clienteDAO.consultarCliente(idCliente);
         if (cliente == null) {
             throw new RuntimeException("Cliente no encontrado");
@@ -53,4 +59,4 @@ public class ClienteBO {
         clienteDAO.eliminarCliente(idCliente);
     }
 }
-}
+

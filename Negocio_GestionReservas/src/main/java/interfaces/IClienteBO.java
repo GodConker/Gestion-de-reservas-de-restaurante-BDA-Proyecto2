@@ -4,10 +4,17 @@
  */
 package interfaces;
 
+import entidades.Cliente;
+import java.util.List;
+
 /**
  *
  * @author danie
  */
 public interface IClienteBO {
     
+    public void agregarCliente(Cliente cliente);
+    public Cliente consultarCliente(Long idCliente);
+    public List<Cliente> consultarTodosLosClientes();
+    public void actualizarCliente(Cliente cliente);
 }
