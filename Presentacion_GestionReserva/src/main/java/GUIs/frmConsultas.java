@@ -4,7 +4,7 @@
  */
 package GUIs;
 
-/**
+/** 
  *
  * @author Dell
  */
@@ -15,6 +15,8 @@ public class frmConsultas extends javax.swing.JFrame {
      */
     public frmConsultas() {
         initComponents();
+        setLocationRelativeTo(null); // Esto centra la ventana
+
     }
 
     /**
@@ -26,21 +28,190 @@ public class frmConsultas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        BtnRegresar = new javax.swing.JButton();
+        BtnHistorial = new javax.swing.JButton();
+        BtnCancelar = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TableReservacionCancelar = new javax.swing.JTable();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel14 = new javax.swing.JLabel();
+        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        jLabel15 = new javax.swing.JLabel();
+        datePicker2 = new com.github.lgooddatepicker.components.DatePicker();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel16 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(153, 0, 0));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel2.setBackground(new java.awt.Color(51, 0, 0));
+
+        jLabel2.setText("Módulo de Consultas");
+        jLabel2.setFont(new java.awt.Font("Champagne & Limousines", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+
+        BtnRegresar.setText("Regresar");
+        BtnRegresar.setBackground(new java.awt.Color(0, 0, 0));
+        BtnRegresar.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
+        BtnRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRegresarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(BtnRegresar)
+                .addGap(129, 129, 129)
+                .addComponent(jLabel2)
+                .addContainerGap(214, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 640, 70));
+
+        BtnHistorial.setBackground(new java.awt.Color(0, 0, 0));
+        BtnHistorial.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
+        BtnHistorial.setForeground(new java.awt.Color(255, 255, 255));
+        BtnHistorial.setText("Historial");
+        BtnHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHistorialActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 500, 100, -1));
+
+        BtnCancelar.setBackground(new java.awt.Color(0, 0, 0));
+        BtnCancelar.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
+        BtnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnCancelar.setText("Limpiar Tabla");
+        jPanel1.add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 500, 110, -1));
+
+        jLabel11.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Resultados de la Búsqueda:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 240, -1));
+
+        TableReservacionCancelar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Cliente", "Fecha", "Hora", "Ubicación"
+            }
+        ));
+        jScrollPane1.setViewportView(TableReservacionCancelar);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 600, 180));
+
+        jLabel10.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Hasta:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 160, 50, 20));
+
+        jLabel12.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Nombre del Cliente:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Pequeña", "Mediana", "Grande" }));
+        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 110, -1));
+
+        jLabel13.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Filtro por Área:");
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, -1, 20));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "General", "Ventana", "Terraza" }));
+        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 110, -1));
+
+        jLabel14.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Número de Teléfono:");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 170, -1));
+        jPanel1.add(datePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 180, 20));
+
+        jLabel15.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Tipo de Mesa:");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, -1, 20));
+        jPanel1.add(datePicker2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 180, 20));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 640, 20));
+
+        jLabel16.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Fecha Reservada desde:");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 210, -1));
+
+        jButton1.setText("Limpiar");
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 120, -1));
+
+        jButton2.setText("Buscar");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 120, -1));
+        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 210, -1));
+        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 210, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 484, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
+        frmMenu menuFrame = new frmMenu();
+        menuFrame.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnRegresarActionPerformed
+
+    private void BtnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHistorialActionPerformed
+        // Crear una nueva instancia de frmMesasHistorial
+        frmMesasHistorial historialFrame = new frmMesasHistorial();
+
+        // Hacer visible el nuevo frame
+        historialFrame.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_BtnHistorialActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +249,29 @@ public class frmConsultas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnCancelar;
+    private javax.swing.JButton BtnHistorial;
+    private javax.swing.JButton BtnRegresar;
+    private javax.swing.JTable TableReservacionCancelar;
+    private com.github.lgooddatepicker.components.DatePicker datePicker1;
+    private com.github.lgooddatepicker.components.DatePicker datePicker2;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

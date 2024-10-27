@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUIs;
-
+ 
 /**
  *
  * @author Dell
@@ -123,8 +123,8 @@ public class frmMenu extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Champagne & Limousines", 1, 27)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel3.setText("Restaurante Rubí");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 60, -1, -1));
+        jLabel3.setText("Restaurantes");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, -1, -1));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Avenida Luna 45, Ciudad Esperanza.");
@@ -151,7 +151,7 @@ public class frmMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
-     frmReservas reservasFrame = new frmReservas(); // Crear instancia del frame de Reservas
+     frmReserva reservasFrame = new frmReserva(); // Crear instancia del frame de Reservas
     reservasFrame.setVisible(true); // Mostrar el frame de Reservas
     this.dispose(); // Cerrar el frame actual (opcional)
     }//GEN-LAST:event_btnReservasActionPerformed

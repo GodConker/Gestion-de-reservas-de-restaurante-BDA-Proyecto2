@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUIs;
-
+ 
 /**
  *
  * @author Dell
@@ -15,6 +15,8 @@ public class frmMesasHistorial extends javax.swing.JFrame {
      */
     public frmMesasHistorial() {
         initComponents();
+        setLocationRelativeTo(null); // Esto centra la ventana
+
     }
 
     /**
@@ -106,9 +108,9 @@ public class frmMesasHistorial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
-        frmMenu menuFrame = new frmMenu(); 
-    menuFrame.setVisible(true); 
-    this.dispose();
+            frmMesas mesasFrame = new frmMesas(); // Crear instancia del frame de Mesas
+    mesasFrame.setVisible(true); // Mostrar el frame de Mesas
+    this.dispose(); // Cerrar el frame actual (opcional)
     }//GEN-LAST:event_BtnRegresarActionPerformed
 
     /**
@@ -125,16 +127,24 @@ public class frmMesasHistorial extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMesasHistorial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMesasHistorial.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMesasHistorial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMesasHistorial.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMesasHistorial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMesasHistorial.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMesasHistorial.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmMesasHistorial.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
