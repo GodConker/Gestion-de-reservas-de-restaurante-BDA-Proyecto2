@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUIs;
-
+ 
 /**
  *
  * @author Dell
@@ -28,22 +28,26 @@ public class frmMesas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        BtnRegresar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         CBXUbiMesas = new javax.swing.JComboBox<>();
-        BtnHistorial = new javax.swing.JButton();
-        BtnGenerarMesas = new javax.swing.JButton();
-        BtnRegresar = new javax.swing.JButton();
+        BtnMesasHistorial = new javax.swing.JButton();
+        BtnGuardarMesas = new javax.swing.JButton();
         CBXTipoMesas = new javax.swing.JComboBox<>();
         TxtfCantidadMesas = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        CBXHorario1 = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        CBXHorario = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        TxtfCambiarNombreRest = new javax.swing.JTextField();
+        BtnCambiarNombre = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,18 +56,29 @@ public class frmMesas extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 0, 0));
 
+        jLabel2.setText("Módulo de Mesas");
         jLabel2.setFont(new java.awt.Font("Champagne & Limousines", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Módulo de Mesas");
+
+        BtnRegresar.setText("Regresar");
+        BtnRegresar.setBackground(new java.awt.Color(0, 0, 0));
+        BtnRegresar.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
+        BtnRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRegresarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(144, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(BtnRegresar)
+                .addGap(81, 81, 81)
                 .addComponent(jLabel2)
-                .addGap(128, 128, 128))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,24 +86,27 @@ public class frmMesas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 450, 70));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 510, 70));
 
         jLabel6.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("a");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Tipo de Mesa:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, 20));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 180, -1, 20));
 
         jLabel8.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Ubicación de Mesas:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+        jLabel8.setText("Nombre del Restaurante:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
         CBXUbiMesas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Ventana", "Terraza" }));
         CBXUbiMesas.addActionListener(new java.awt.event.ActionListener() {
@@ -96,50 +114,53 @@ public class frmMesas extends javax.swing.JFrame {
                 CBXUbiMesasActionPerformed(evt);
             }
         });
-        jPanel1.add(CBXUbiMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 110, -1));
+        jPanel1.add(CBXUbiMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 110, -1));
 
-        BtnHistorial.setBackground(new java.awt.Color(0, 0, 0));
-        BtnHistorial.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
-        BtnHistorial.setForeground(new java.awt.Color(255, 255, 255));
-        BtnHistorial.setText("Ver Historial");
-        jPanel1.add(BtnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 110, -1));
-
-        BtnGenerarMesas.setBackground(new java.awt.Color(0, 0, 0));
-        BtnGenerarMesas.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
-        BtnGenerarMesas.setForeground(new java.awt.Color(255, 255, 255));
-        BtnGenerarMesas.setText("Generar Mesas");
-        jPanel1.add(BtnGenerarMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, 130, -1));
-
-        BtnRegresar.setBackground(new java.awt.Color(0, 0, 0));
-        BtnRegresar.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
-        BtnRegresar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnRegresar.setText("Regresar");
-        BtnRegresar.addActionListener(new java.awt.event.ActionListener() {
+        BtnMesasHistorial.setText("Ver Historial");
+        BtnMesasHistorial.setBackground(new java.awt.Color(0, 0, 0));
+        BtnMesasHistorial.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
+        BtnMesasHistorial.setForeground(new java.awt.Color(255, 255, 255));
+        BtnMesasHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnRegresarActionPerformed(evt);
+                BtnMesasHistorialActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 90, 29));
+        jPanel1.add(BtnMesasHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 110, -1));
+
+        BtnGuardarMesas.setText("Guardar");
+        BtnGuardarMesas.setBackground(new java.awt.Color(0, 0, 0));
+        BtnGuardarMesas.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
+        BtnGuardarMesas.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(BtnGuardarMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 110, -1));
 
         CBXTipoMesas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pequeña", "Mediana", "Grande" }));
-        jPanel1.add(CBXTipoMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 150, 110, -1));
-        jPanel1.add(TxtfCantidadMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 110, -1));
+        jPanel1.add(CBXTipoMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 110, -1));
+        jPanel1.add(TxtfCantidadMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 110, -1));
 
         jLabel10.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Cantidad de Mesas:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 90, -1));
+        CBXHorario1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(CBXHorario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 90, -1));
 
         jLabel11.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Horario de Atención:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 90, -1));
+        CBXHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(CBXHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 90, -1));
+
+        jLabel9.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Ubicación de Mesas:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
+        jPanel1.add(TxtfCambiarNombreRest, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 150, -1));
+
+        BtnCambiarNombre.setText("Cambiar Nombre");
+        jPanel1.add(BtnCambiarNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,9 +170,7 @@ public class frmMesas extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
         );
 
         pack();
@@ -162,10 +181,20 @@ public class frmMesas extends javax.swing.JFrame {
     }//GEN-LAST:event_CBXUbiMesasActionPerformed
 
     private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
-        frmMenu menuFrame = new frmMenu(); 
-    menuFrame.setVisible(true); 
-    this.dispose();
+        frmMenu menuFrame = new frmMenu();
+        menuFrame.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_BtnRegresarActionPerformed
+
+    private void BtnMesasHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMesasHistorialActionPerformed
+        // Crear una nueva instancia de frmMesasHistorial
+        frmMesasHistorial historialFrame = new frmMesasHistorial();
+
+        // Hacer visible el nuevo frame
+        historialFrame.setVisible(true);
+
+        this.dispose();
+    }//GEN-LAST:event_BtnMesasHistorialActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,20 +232,24 @@ public class frmMesas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnGenerarMesas;
-    private javax.swing.JButton BtnHistorial;
+    private javax.swing.JButton BtnCambiarNombre;
+    private javax.swing.JButton BtnGuardarMesas;
+    private javax.swing.JButton BtnMesasHistorial;
     private javax.swing.JButton BtnRegresar;
+    private javax.swing.JComboBox<String> CBXHorario;
+    private javax.swing.JComboBox<String> CBXHorario1;
     private javax.swing.JComboBox<String> CBXTipoMesas;
     private javax.swing.JComboBox<String> CBXUbiMesas;
+    private javax.swing.JTextField TxtfCambiarNombreRest;
     private javax.swing.JTextField TxtfCantidadMesas;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
+    private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
