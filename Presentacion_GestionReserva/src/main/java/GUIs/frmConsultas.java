@@ -36,22 +36,22 @@ public class frmConsultas extends javax.swing.JFrame {
         BtnCancelar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TableReservacionCancelar = new javax.swing.JTable();
+        TableModuloConsultas = new javax.swing.JTable();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CBXTipoMesa = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        CBXFiltroArea = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
-        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
+        DPFechaReservadaHasta = new com.github.lgooddatepicker.components.DatePicker();
         jLabel15 = new javax.swing.JLabel();
-        datePicker2 = new com.github.lgooddatepicker.components.DatePicker();
+        DPFechaReservadaDesde = new com.github.lgooddatepicker.components.DatePicker();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel16 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        BtnLimpiar = new javax.swing.JButton();
+        BtnBuscar = new javax.swing.JButton();
+        TxtfBuscarNombreCliente = new javax.swing.JTextField();
+        TxtfNumTelefono = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,7 +121,7 @@ public class frmConsultas extends javax.swing.JFrame {
         jLabel11.setText("Resultados de la Búsqueda:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 240, -1));
 
-        TableReservacionCancelar.setModel(new javax.swing.table.DefaultTableModel(
+        TableModuloConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -132,7 +132,7 @@ public class frmConsultas extends javax.swing.JFrame {
                 "Cliente", "Fecha", "Hora", "Ubicación"
             }
         ));
-        jScrollPane1.setViewportView(TableReservacionCancelar);
+        jScrollPane1.setViewportView(TableModuloConsultas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 600, 180));
 
@@ -146,28 +146,28 @@ public class frmConsultas extends javax.swing.JFrame {
         jLabel12.setText("Nombre del Cliente:");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Pequeña", "Mediana", "Grande" }));
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 110, -1));
+        CBXTipoMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Pequeña", "Mediana", "Grande" }));
+        jPanel1.add(CBXTipoMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 110, -1));
 
         jLabel13.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Filtro por Área:");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, -1, 20));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "General", "Ventana", "Terraza" }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 110, -1));
+        CBXFiltroArea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "General", "Ventana", "Terraza" }));
+        jPanel1.add(CBXFiltroArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 110, -1));
 
         jLabel14.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Número de Teléfono:");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 170, -1));
-        jPanel1.add(datePicker1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 180, 20));
+        jPanel1.add(DPFechaReservadaHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 180, 20));
 
         jLabel15.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Tipo de Mesa:");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, -1, 20));
-        jPanel1.add(datePicker2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 180, 20));
+        jPanel1.add(DPFechaReservadaDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 180, 20));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 640, 20));
 
         jLabel16.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
@@ -175,13 +175,13 @@ public class frmConsultas extends javax.swing.JFrame {
         jLabel16.setText("Fecha Reservada desde:");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 210, -1));
 
-        jButton1.setText("Limpiar");
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 120, -1));
+        BtnLimpiar.setText("Limpiar");
+        jPanel1.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 120, -1));
 
-        jButton2.setText("Buscar");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 120, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 210, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 210, -1));
+        BtnBuscar.setText("Buscar");
+        jPanel1.add(BtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 120, -1));
+        jPanel1.add(TxtfBuscarNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 210, -1));
+        jPanel1.add(TxtfNumTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 210, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,16 +249,18 @@ public class frmConsultas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnBuscar;
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnHistorial;
+    private javax.swing.JButton BtnLimpiar;
     private javax.swing.JButton BtnRegresar;
-    private javax.swing.JTable TableReservacionCancelar;
-    private com.github.lgooddatepicker.components.DatePicker datePicker1;
-    private com.github.lgooddatepicker.components.DatePicker datePicker2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> CBXFiltroArea;
+    private javax.swing.JComboBox<String> CBXTipoMesa;
+    private com.github.lgooddatepicker.components.DatePicker DPFechaReservadaDesde;
+    private com.github.lgooddatepicker.components.DatePicker DPFechaReservadaHasta;
+    private javax.swing.JTable TableModuloConsultas;
+    private javax.swing.JTextField TxtfBuscarNombreCliente;
+    private javax.swing.JTextField TxtfNumTelefono;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -271,7 +273,5 @@ public class frmConsultas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

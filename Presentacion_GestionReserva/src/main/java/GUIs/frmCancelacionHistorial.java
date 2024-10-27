@@ -29,7 +29,7 @@ public class frmCancelacionHistorial extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        BtnHistorial = new javax.swing.JButton();
+        BtnRegresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableReservacionCancelar = new javax.swing.JTable();
 
@@ -63,16 +63,16 @@ public class frmCancelacionHistorial extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 590, 70));
 
-        BtnHistorial.setText("Regresar");
-        BtnHistorial.setBackground(new java.awt.Color(0, 0, 0));
-        BtnHistorial.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
-        BtnHistorial.setForeground(new java.awt.Color(255, 255, 255));
-        BtnHistorial.addActionListener(new java.awt.event.ActionListener() {
+        BtnRegresar.setBackground(new java.awt.Color(0, 0, 0));
+        BtnRegresar.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
+        BtnRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnRegresar.setText("Regresar");
+        BtnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnHistorialActionPerformed(evt);
+                BtnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 100, -1));
+        jPanel1.add(BtnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 100, -1));
 
         TableReservacionCancelar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -103,11 +103,11 @@ public class frmCancelacionHistorial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHistorialActionPerformed
+    private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
     frmCancelacion cancelacionFrame = new frmCancelacion(); // Crear instancia del frame de Cancelación
     cancelacionFrame.setVisible(true); // Mostrar el frame de Cancelación
     this.dispose();
-    }//GEN-LAST:event_BtnHistorialActionPerformed
+    }//GEN-LAST:event_BtnRegresarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,7 +145,7 @@ public class frmCancelacionHistorial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnHistorial;
+    private javax.swing.JButton BtnRegresar;
     private javax.swing.JTable TableReservacionCancelar;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

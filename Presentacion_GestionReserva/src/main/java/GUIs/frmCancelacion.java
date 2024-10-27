@@ -36,16 +36,16 @@ public class frmCancelacion extends javax.swing.JFrame {
         BtnRegresar = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         BtnHistorial = new javax.swing.JButton();
-        BtnCancelar = new javax.swing.JButton();
+        BtnConfirmar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        BtnBuscarReservacion = new javax.swing.JButton();
+        BtnBuscarReservacion1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableReservacionCancelar = new javax.swing.JTable();
         TxtfMulta = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        BtnBuscarReservacion1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        datePicker2 = new com.github.lgooddatepicker.components.DatePicker();
+        BtnBuscarReservacion = new javax.swing.JButton();
+        TxtfBuscarReserva = new javax.swing.JTextField();
+        DPBuscarFecha = new com.github.lgooddatepicker.components.DatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,19 +107,19 @@ public class frmCancelacion extends javax.swing.JFrame {
         });
         jPanel1.add(BtnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 100, -1));
 
-        BtnCancelar.setText("Confirmar");
-        BtnCancelar.setBackground(new java.awt.Color(0, 0, 0));
-        BtnCancelar.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
-        BtnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 100, -1));
+        BtnConfirmar.setText("Confirmar");
+        BtnConfirmar.setBackground(new java.awt.Color(0, 0, 0));
+        BtnConfirmar.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
+        BtnConfirmar.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 100, -1));
 
         jLabel11.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Multa Calculada:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
 
-        BtnBuscarReservacion.setText("Buscar");
-        jPanel1.add(BtnBuscarReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 80, -1));
+        BtnBuscarReservacion1.setText("Buscar");
+        jPanel1.add(BtnBuscarReservacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 80, -1));
 
         TableReservacionCancelar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -142,10 +142,10 @@ public class frmCancelacion extends javax.swing.JFrame {
         jLabel9.setText("Buscar Reserva:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, 20));
 
-        BtnBuscarReservacion1.setText("Buscar");
-        jPanel1.add(BtnBuscarReservacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 80, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, -1));
-        jPanel1.add(datePicker2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 220, 20));
+        BtnBuscarReservacion.setText("Buscar");
+        jPanel1.add(BtnBuscarReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 80, -1));
+        jPanel1.add(TxtfBuscarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, -1));
+        jPanel1.add(DPBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 220, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,12 +215,13 @@ public class frmCancelacion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnBuscarReservacion;
     private javax.swing.JButton BtnBuscarReservacion1;
-    private javax.swing.JButton BtnCancelar;
+    private javax.swing.JButton BtnConfirmar;
     private javax.swing.JButton BtnHistorial;
     private javax.swing.JButton BtnRegresar;
+    private com.github.lgooddatepicker.components.DatePicker DPBuscarFecha;
     private javax.swing.JTable TableReservacionCancelar;
+    private javax.swing.JTextField TxtfBuscarReserva;
     private javax.swing.JTextField TxtfMulta;
-    private com.github.lgooddatepicker.components.DatePicker datePicker2;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
@@ -228,6 +229,5 @@ public class frmCancelacion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

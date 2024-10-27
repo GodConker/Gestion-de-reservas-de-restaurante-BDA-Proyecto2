@@ -32,11 +32,9 @@ public class frmMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnReportes = new javax.swing.JButton();
         btnConsultas = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         btnCancelacion = new javax.swing.JButton();
         btnReservas = new javax.swing.JButton();
         btnMesas = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -72,10 +70,6 @@ public class frmMenu extends javax.swing.JFrame {
         });
         jPanel2.add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, -1));
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Amanecer 479, Ciudad Obregón.");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 470, -1, -1));
-
         btnCancelacion.setBackground(new java.awt.Color(0, 0, 0));
         btnCancelacion.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
         btnCancelacion.setForeground(new java.awt.Color(255, 255, 255));
@@ -108,10 +102,6 @@ public class frmMenu extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btnMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 70, -1));
-
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("contacto@rubi-restaurante.com");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 470, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/elegante.jpg"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 135, -1, -1));
@@ -224,9 +214,7 @@ public class frmMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

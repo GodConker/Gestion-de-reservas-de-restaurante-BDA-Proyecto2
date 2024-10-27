@@ -55,7 +55,7 @@ public class frmReserva extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
         TxtfNombreCompleto = new javax.swing.JTextField();
-        BtnBuscar = new javax.swing.JButton();
+        BtnBuscarRegistrado = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -217,20 +217,20 @@ public class frmReserva extends javax.swing.JFrame {
         });
         jPanel1.add(TxtfNombreCompleto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, 190, -1));
 
-        BtnBuscar.setBackground(new java.awt.Color(0, 0, 0));
-        BtnBuscar.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
-        BtnBuscar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnBuscar.setText("Buscar");
-        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+        BtnBuscarRegistrado.setText("Buscar");
+        BtnBuscarRegistrado.setBackground(new java.awt.Color(0, 0, 0));
+        BtnBuscarRegistrado.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
+        BtnBuscarRegistrado.setForeground(new java.awt.Color(255, 255, 255));
+        BtnBuscarRegistrado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnBuscarActionPerformed(evt);
+                BtnBuscarRegistradoActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 90, 30));
+        jPanel1.add(BtnBuscarRegistrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 90, 30));
 
+        jLabel11.setText("Buscar Cliente Registrado:");
         jLabel11.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Buscar Cliente Registrado:");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -397,9 +397,9 @@ public class frmReserva extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_BtnRegresarActionPerformed
 
-    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+    private void BtnBuscarRegistradoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarRegistradoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnBuscarActionPerformed
+    }//GEN-LAST:event_BtnBuscarRegistradoActionPerformed
 
     private void TxtfNombreCompletoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtfNombreCompletoActionPerformed
         // TODO add your handling code here:
@@ -449,7 +449,7 @@ public class frmReserva extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnBuscar;
+    private javax.swing.JButton BtnBuscarRegistrado;
     private javax.swing.JButton BtnCancelar;
     private javax.swing.JButton BtnConfirmar;
     private javax.swing.JButton BtnRegresar;

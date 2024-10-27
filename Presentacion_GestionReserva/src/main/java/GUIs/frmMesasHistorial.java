@@ -33,7 +33,7 @@ public class frmMesasHistorial extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         BtnRegresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        TableMesasGeneradas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,7 +76,7 @@ public class frmMesasHistorial extends javax.swing.JFrame {
         });
         jPanel1.add(BtnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 90, 29));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        TableMesasGeneradas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -87,7 +87,7 @@ public class frmMesasHistorial extends javax.swing.JFrame {
                 "Código de Mesa", "Tipo", "Ubicación"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(TableMesasGeneradas);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 520, 110));
 
@@ -158,10 +158,10 @@ public class frmMesasHistorial extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnRegresar;
+    private javax.swing.JTable TableMesasGeneradas;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
