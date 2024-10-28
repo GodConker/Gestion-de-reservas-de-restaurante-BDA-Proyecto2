@@ -100,25 +100,25 @@ public class frmReportes extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 650, 70));
 
+        jLabel16.setText("Página:");
         jLabel16.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Página:");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 260, 70, -1));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, 80, -1));
 
+        jLabel10.setText("De:");
         jLabel10.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("De:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 30, 20));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 40, 20));
 
+        jLabel11.setText("Hasta:");
         jLabel11.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Hasta:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 50, 20));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 120, 70, 20));
 
+        jLabel13.setText("Filtro por Área:");
         jLabel13.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Filtro por Área:");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 130, 20));
+        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 140, 20));
 
         CBXFiltroArea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "General", "Ventana", "Terraza" }));
         jPanel1.add(CBXFiltroArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, 130, -1));
@@ -129,7 +129,7 @@ public class frmReportes extends javax.swing.JFrame {
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, -1, 20));
 
         CBXTipoMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Pequeña", "Mediana", "Grande" }));
-        jPanel1.add(CBXTipoMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 120, -1));
+        jPanel1.add(CBXTipoMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 160, 120, -1));
 
         BtnExportarPDF.setText("Exportar a PDF");
         jPanel1.add(BtnExportarPDF, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 520, 140, -1));
@@ -160,12 +160,12 @@ public class frmReportes extends javax.swing.JFrame {
                 TxtfPaginaActionPerformed(evt);
             }
         });
-        jPanel1.add(TxtfPagina, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 50, -1));
+        jPanel1.add(TxtfPagina, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 260, 60, -1));
 
+        jLabel18.setText("Nombre del Restaurante:");
         jLabel18.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Nombre del Restaurante:");
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, 200, -1));
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 240, -1));
 
         jLabel19.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
@@ -177,7 +177,7 @@ public class frmReportes extends javax.swing.JFrame {
                 TxtfFechaGenActionPerformed(evt);
             }
         });
-        jPanel1.add(TxtfFechaGen, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 170, -1));
+        jPanel1.add(TxtfFechaGen, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 170, -1));
 
         TableReporte.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,12 +200,12 @@ public class frmReportes extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 630, 90));
 
+        jLabel20.setText("Fecha de Generación:");
         jLabel20.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("Fecha de Generación:");
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 180, -1));
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 210, -1));
         jPanel1.add(DPFechaDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 190, -1));
-        jPanel1.add(DPFechaHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, -1, -1));
+        jPanel1.add(DPFechaHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, -1, -1));
         jPanel1.add(TxtfNombreRestaurante, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 160, -1));
 
         BtnGenerarReporte.setText("Generar Reporte");

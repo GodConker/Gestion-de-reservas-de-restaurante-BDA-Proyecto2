@@ -5,15 +5,8 @@
 package entidades;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-/**
- *
- * @author danie
- */
 @Entity
 public class Mesa implements Serializable {
 
@@ -22,12 +15,24 @@ public class Mesa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "restaurante_id") // Nombre de la columna en la tabla de Mesa
+    private Restaurante restaurante;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Restaurante getRestaurante() {
+        return restaurante;
+    }
+
+    public void setRestaurante(Restaurante restaurante) {
+        this.restaurante = restaurante;
     }
 
     @Override
@@ -39,7 +44,6 @@ public class Mesa implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Mesa)) {
             return false;
         }
@@ -54,5 +58,4 @@ public class Mesa implements Serializable {
     public String toString() {
         return "entidades.Mesa[ id=" + id + " ]";
     }
-    
 }

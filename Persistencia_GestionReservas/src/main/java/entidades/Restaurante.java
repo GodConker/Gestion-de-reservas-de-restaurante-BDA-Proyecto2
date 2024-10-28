@@ -5,15 +5,10 @@
 package entidades;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author danie
- */
 @Entity
 public class Restaurante implements Serializable {
 
@@ -22,12 +17,23 @@ public class Restaurante implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @OneToMany(mappedBy = "restaurante", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<Mesa> mesas = new ArrayList<>();
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Mesa> getMesas() {
+        return mesas;
+    }
+
+    public void setMesas(List<Mesa> mesas) {
+        this.mesas = mesas;
     }
 
     @Override
@@ -39,7 +45,6 @@ public class Restaurante implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Restaurante)) {
             return false;
         }
@@ -54,5 +59,4 @@ public class Restaurante implements Serializable {
     public String toString() {
         return "entidades.Restaurante[ id=" + id + " ]";
     }
-    
 }

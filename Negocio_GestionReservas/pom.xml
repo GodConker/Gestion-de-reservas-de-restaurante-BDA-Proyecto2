@@ -10,6 +10,7 @@
             <groupId>com.mycompany</groupId>
             <artifactId>Persistencia_GestionReservas</artifactId>
             <version>1.0-SNAPSHOT</version>
+            
         </dependency>
 
         <!-- Otras dependencias -->

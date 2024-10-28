@@ -74,9 +74,9 @@ public class frmCancelacion extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(BtnRegresar)
-                .addGap(58, 58, 58)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel2)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,13 +113,13 @@ public class frmCancelacion extends javax.swing.JFrame {
         BtnConfirmar.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 100, -1));
 
+        jLabel11.setText("Multa Calculada:");
         jLabel11.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Multa Calculada:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
         BtnBuscarReservacion1.setText("Buscar");
-        jPanel1.add(BtnBuscarReservacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 80, -1));
+        jPanel1.add(BtnBuscarReservacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 80, -1));
 
         TableReservacionCancelar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,9 +143,9 @@ public class frmCancelacion extends javax.swing.JFrame {
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, 20));
 
         BtnBuscarReservacion.setText("Buscar");
-        jPanel1.add(BtnBuscarReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 80, -1));
-        jPanel1.add(TxtfBuscarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 220, -1));
-        jPanel1.add(DPBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 140, 220, 20));
+        jPanel1.add(BtnBuscarReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 80, -1));
+        jPanel1.add(TxtfBuscarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 220, -1));
+        jPanel1.add(DPBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 220, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

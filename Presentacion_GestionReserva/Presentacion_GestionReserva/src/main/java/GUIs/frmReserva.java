@@ -84,23 +84,23 @@ public class frmReserva extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel2)
-                .addGap(122, 122, 122))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 450, 70));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 480, 70));
 
         jLabel3.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -112,12 +112,12 @@ public class frmReserva extends javax.swing.JFrame {
                 TxtfBuscarClienteActionPerformed(evt);
             }
         });
-        jPanel1.add(TxtfBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 300, -1));
+        jPanel1.add(TxtfBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 300, -1));
 
+        jLabel4.setText("Teléfono:");
         jLabel4.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Teléfono:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 290, -1, 20));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, -1, 20));
 
         TxtfTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,11 +126,11 @@ public class frmReserva extends javax.swing.JFrame {
         });
         jPanel1.add(TxtfTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 190, -1));
 
+        jLabel5.setText("Fecha y Hora:");
         jLabel5.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Fecha y Hora:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 110, 20));
-        jPanel1.add(DTPFechaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 310, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 130, 20));
+        jPanel1.add(DTPFechaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 310, -1));
 
         jLabel6.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -143,7 +143,7 @@ public class frmReserva extends javax.swing.JFrame {
                 CBXNumPersonasActionPerformed(evt);
             }
         });
-        jPanel1.add(CBXNumPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 370, 110, -1));
+        jPanel1.add(CBXNumPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 110, -1));
 
         jLabel7.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,7 +155,7 @@ public class frmReserva extends javax.swing.JFrame {
                 TxtfTipoMesaActionPerformed(evt);
             }
         });
-        jPanel1.add(TxtfTipoMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 410, 110, -1));
+        jPanel1.add(TxtfTipoMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, 110, -1));
 
         jLabel8.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -168,7 +168,7 @@ public class frmReserva extends javax.swing.JFrame {
                 CBXUbicacionActionPerformed(evt);
             }
         });
-        jPanel1.add(CBXUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, 110, -1));
+        jPanel1.add(CBXUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, 110, -1));
 
         jLabel9.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -180,7 +180,7 @@ public class frmReserva extends javax.swing.JFrame {
                 TxtfCostoTotalActionPerformed(evt);
             }
         });
-        jPanel1.add(TxtfCostoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 100, -1));
+        jPanel1.add(TxtfCostoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 100, -1));
 
         BtnCancelar.setText("Cancelar");
         BtnCancelar.setBackground(new java.awt.Color(0, 0, 0));
@@ -191,7 +191,7 @@ public class frmReserva extends javax.swing.JFrame {
                 BtnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, 90, 30));
+        jPanel1.add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, 120, 30));
 
         BtnConfirmar.setText("Confirmar");
         BtnConfirmar.setBackground(new java.awt.Color(0, 0, 0));
@@ -202,13 +202,13 @@ public class frmReserva extends javax.swing.JFrame {
                 BtnConfirmarActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 500, 90, 30));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 450, 10));
+        jPanel1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 110, 30));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 480, 10));
 
+        jLabel10.setText("Nombre Completo:");
         jLabel10.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Nombre Completo:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, -1, -1));
 
         TxtfNombreCompleto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -226,12 +226,12 @@ public class frmReserva extends javax.swing.JFrame {
                 BtnBuscarRegistradoActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnBuscarRegistrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, 90, 30));
+        jPanel1.add(BtnBuscarRegistrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 90, 30));
 
         jLabel11.setText("Buscar Cliente Registrado:");
         jLabel11.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 100, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

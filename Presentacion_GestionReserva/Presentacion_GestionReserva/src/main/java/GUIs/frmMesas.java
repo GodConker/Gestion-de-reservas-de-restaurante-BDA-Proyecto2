@@ -76,27 +76,27 @@ public class frmMesas extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(BtnRegresar)
-                .addGap(81, 81, 81)
+                .addGap(133, 133, 133)
                 .addComponent(jLabel2)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 50, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 510, 70));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 660, 70));
 
+        jLabel6.setText("a");
         jLabel6.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("a");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -114,7 +114,7 @@ public class frmMesas extends javax.swing.JFrame {
                 CBXUbiMesasActionPerformed(evt);
             }
         });
-        jPanel1.add(CBXUbiMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 110, -1));
+        jPanel1.add(CBXUbiMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, 110, -1));
 
         BtnMesasHistorial.setText("Ver Historial");
         BtnMesasHistorial.setBackground(new java.awt.Color(0, 0, 0));
@@ -125,17 +125,17 @@ public class frmMesas extends javax.swing.JFrame {
                 BtnMesasHistorialActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnMesasHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 110, -1));
+        jPanel1.add(BtnMesasHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, 130, -1));
 
         BtnGuardarMesas.setText("Guardar");
         BtnGuardarMesas.setBackground(new java.awt.Color(0, 0, 0));
         BtnGuardarMesas.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
         BtnGuardarMesas.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(BtnGuardarMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 110, -1));
+        jPanel1.add(BtnGuardarMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, 110, -1));
 
         CBXTipoMesas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pequeña", "Mediana", "Grande" }));
-        jPanel1.add(CBXTipoMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 110, -1));
-        jPanel1.add(TxtfCantidadMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 220, 110, -1));
+        jPanel1.add(CBXTipoMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 110, -1));
+        jPanel1.add(TxtfCantidadMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, 110, -1));
 
         jLabel10.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -143,7 +143,7 @@ public class frmMesas extends javax.swing.JFrame {
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
 
         CBXHorario1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(CBXHorario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 260, 90, -1));
+        jPanel1.add(CBXHorario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 260, 90, -1));
 
         jLabel11.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,22 +151,22 @@ public class frmMesas extends javax.swing.JFrame {
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, -1, -1));
 
         CBXHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(CBXHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 90, -1));
+        jPanel1.add(CBXHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 90, -1));
 
         jLabel9.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Ubicación de Mesas:");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
-        jPanel1.add(TxtfCambiarNombreRest, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 150, -1));
+        jPanel1.add(TxtfCambiarNombreRest, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 200, -1));
 
         BtnCambiarNombre.setText("Cambiar Nombre");
-        jPanel1.add(BtnCambiarNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, -1, -1));
+        jPanel1.add(BtnCambiarNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

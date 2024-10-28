@@ -48,38 +48,38 @@ public class frmMenu extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 0, 0));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnReportes.setText("Reportes");
         btnReportes.setBackground(new java.awt.Color(0, 0, 0));
         btnReportes.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
         btnReportes.setForeground(new java.awt.Color(255, 255, 255));
-        btnReportes.setText("Reportes");
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReportesActionPerformed(evt);
             }
         });
-        jPanel2.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, -1, -1));
+        jPanel2.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 120, -1, -1));
 
+        btnConsultas.setText("Consultas");
         btnConsultas.setBackground(new java.awt.Color(0, 0, 0));
         btnConsultas.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
         btnConsultas.setForeground(new java.awt.Color(255, 255, 255));
-        btnConsultas.setText("Consultas");
         btnConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultasActionPerformed(evt);
             }
         });
-        jPanel2.add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, -1));
+        jPanel2.add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, -1, -1));
 
+        btnCancelacion.setText("Cancelación");
         btnCancelacion.setBackground(new java.awt.Color(0, 0, 0));
         btnCancelacion.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
         btnCancelacion.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelacion.setText("Cancelación");
         btnCancelacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelacionActionPerformed(evt);
             }
         });
-        jPanel2.add(btnCancelacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 110, -1));
+        jPanel2.add(btnCancelacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 120, -1));
 
         btnReservas.setBackground(new java.awt.Color(0, 0, 0));
         btnReservas.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
@@ -90,18 +90,18 @@ public class frmMenu extends javax.swing.JFrame {
                 btnReservasActionPerformed(evt);
             }
         });
-        jPanel2.add(btnReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 90, -1));
+        jPanel2.add(btnReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, -1));
 
+        btnMesas.setText("Mesas");
         btnMesas.setBackground(new java.awt.Color(0, 0, 0));
         btnMesas.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
         btnMesas.setForeground(new java.awt.Color(255, 255, 255));
-        btnMesas.setText("Mesas");
         btnMesas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMesasActionPerformed(evt);
             }
         });
-        jPanel2.add(btnMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 70, -1));
+        jPanel2.add(btnMesas, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 90, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/elegante.jpg"))); // NOI18N
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 135, -1, -1));

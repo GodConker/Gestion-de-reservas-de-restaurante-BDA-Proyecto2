@@ -5,15 +5,10 @@
 package entidades;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- *
- * @author danie
- */
 @Entity
 public class Cliente implements Serializable {
 
@@ -24,6 +19,9 @@ public class Cliente implements Serializable {
     
     private String nombreCompleto;
     private String telefono;
+
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<Reserva> reservas = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -49,6 +47,14 @@ public class Cliente implements Serializable {
         this.telefono = telefono;
     }
 
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -58,7 +64,6 @@ public class Cliente implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Cliente)) {
             return false;
         }
@@ -73,5 +78,4 @@ public class Cliente implements Serializable {
     public String toString() {
         return "entidades.Cliente[ id=" + id + " ]";
     }
-    
 }

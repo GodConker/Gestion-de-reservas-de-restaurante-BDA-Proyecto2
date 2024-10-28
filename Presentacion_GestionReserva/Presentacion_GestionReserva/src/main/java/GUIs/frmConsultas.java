@@ -80,9 +80,9 @@ public class frmConsultas extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(BtnRegresar)
-                .addGap(129, 129, 129)
+                .addGap(138, 138, 138)
                 .addComponent(jLabel2)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -97,7 +97,7 @@ public class frmConsultas extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 640, 70));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 700, 70));
 
         BtnHistorial.setBackground(new java.awt.Color(0, 0, 0));
         BtnHistorial.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
@@ -116,10 +116,10 @@ public class frmConsultas extends javax.swing.JFrame {
         BtnCancelar.setText("Limpiar Tabla");
         jPanel1.add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 500, 110, -1));
 
+        jLabel11.setText("Resultados de la Búsqueda:");
         jLabel11.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Resultados de la Búsqueda:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 240, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 270, -1));
 
         TableModuloConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,20 +134,20 @@ public class frmConsultas extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TableModuloConsultas);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 600, 180));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 600, 180));
 
+        jLabel10.setText("Hasta:");
         jLabel10.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Hasta:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(398, 160, 50, 20));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, 80, 20));
 
+        jLabel12.setText("Nombre del Cliente:");
         jLabel12.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Nombre del Cliente:");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, 20));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, 20));
 
         CBXTipoMesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Pequeña", "Mediana", "Grande" }));
-        jPanel1.add(CBXTipoMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 110, -1));
+        jPanel1.add(CBXTipoMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, 110, -1));
 
         jLabel13.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,39 +155,39 @@ public class frmConsultas extends javax.swing.JFrame {
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, -1, 20));
 
         CBXFiltroArea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "General", "Ventana", "Terraza" }));
-        jPanel1.add(CBXFiltroArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 110, -1));
+        jPanel1.add(CBXFiltroArea, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 110, -1));
 
+        jLabel14.setText("Número de Teléfono:");
         jLabel14.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Número de Teléfono:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 170, -1));
-        jPanel1.add(DPFechaReservadaHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, 180, 20));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 200, -1));
+        jPanel1.add(DPFechaReservadaHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 180, 20));
 
+        jLabel15.setText("Tipo de Mesa:");
         jLabel15.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Tipo de Mesa:");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 130, -1, 20));
-        jPanel1.add(DPFechaReservadaDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 180, 20));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 640, 20));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, -1, 20));
+        jPanel1.add(DPFechaReservadaDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 180, 20));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 700, 20));
 
+        jLabel16.setText("Fecha Reservada desde:");
         jLabel16.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Fecha Reservada desde:");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 210, -1));
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 240, -1));
 
         BtnLimpiar.setText("Limpiar");
-        jPanel1.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 120, -1));
+        jPanel1.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 120, -1));
 
         BtnBuscar.setText("Buscar");
         jPanel1.add(BtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 120, -1));
-        jPanel1.add(TxtfBuscarNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 210, -1));
-        jPanel1.add(TxtfNumTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 210, -1));
+        jPanel1.add(TxtfBuscarNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 200, -1));
+        jPanel1.add(TxtfNumTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 210, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

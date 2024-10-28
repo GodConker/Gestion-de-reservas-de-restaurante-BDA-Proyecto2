@@ -74,7 +74,7 @@ public class frmMesasHistorial extends javax.swing.JFrame {
                 BtnRegresarActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 90, 29));
+        jPanel1.add(BtnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 120, 29));
 
         TableMesasGeneradas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -22,12 +24,25 @@ public class HistorialReserva implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    // Relación muchos a uno con Reserva.
+    @ManyToOne
+    @JoinColumn(name = "id_reserva") // Este será el nombre de la columna en la tabla HistorialReserva.
+    private Reserva reserva;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Reserva getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(Reserva reserva) {
+        this.reserva = reserva;
     }
 
     @Override
@@ -39,7 +54,6 @@ public class HistorialReserva implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof HistorialReserva)) {
             return false;
         }
@@ -54,5 +68,4 @@ public class HistorialReserva implements Serializable {
     public String toString() {
         return "entidades.HistorialReserva[ id=" + id + " ]";
     }
-    
 }
