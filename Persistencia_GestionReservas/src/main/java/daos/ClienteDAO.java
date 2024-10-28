@@ -4,11 +4,6 @@
  */
 package daos;
 
-/**
- *
- * @author danie
- */
-
 import entidades.Cliente;
 import javax.persistence.*;
 import java.util.List;
@@ -23,21 +18,32 @@ public class ClienteDAO {
     }
 
     public void agregarCliente(Cliente cliente) {
+        if (cliente == null) {
+            throw new IllegalArgumentException("El cliente no puede ser nulo.");
+        }
+
+        EntityTransaction transaction = em.getTransaction();
         try {
-            em.getTransaction().begin();
+            transaction.begin();
             em.persist(cliente);
-            em.getTransaction().commit();
+            transaction.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
-            throw new RuntimeException("Error al agregar el cliente: " + e.getMessage());
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Error al agregar el cliente: " + e.getMessage(), e);
         }
     }
 
     public Cliente consultarCliente(Long idCliente) {
+        if (idCliente == null) {
+            throw new IllegalArgumentException("El ID del cliente no puede ser nulo.");
+        }
+
         try {
             return em.find(Cliente.class, idCliente);
         } catch (Exception e) {
-            throw new RuntimeException("Error al consultar el cliente: " + e.getMessage());
+            throw new RuntimeException("Error al consultar el cliente: " + e.getMessage(), e);
         }
     }
 
@@ -45,32 +51,46 @@ public class ClienteDAO {
         try {
             return em.createQuery("SELECT c FROM Cliente c", Cliente.class).getResultList();
         } catch (Exception e) {
-            throw new RuntimeException("Error al consultar los clientes: " + e.getMessage());
+            throw new RuntimeException("Error al consultar los clientes: " + e.getMessage(), e);
         }
     }
 
     public void actualizarCliente(Cliente cliente) {
+        if (cliente == null) {
+            throw new IllegalArgumentException("El cliente no puede ser nulo.");
+        }
+
+        EntityTransaction transaction = em.getTransaction();
         try {
-            em.getTransaction().begin();
+            transaction.begin();
             em.merge(cliente);
-            em.getTransaction().commit();
+            transaction.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
-            throw new RuntimeException("Error al actualizar el cliente: " + e.getMessage());
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Error al actualizar el cliente: " + e.getMessage(), e);
         }
     }
 
     public void eliminarCliente(Long idCliente) {
+        if (idCliente == null) {
+            throw new IllegalArgumentException("El ID del cliente no puede ser nulo.");
+        }
+
+        EntityTransaction transaction = em.getTransaction();
         try {
-            em.getTransaction().begin();
+            transaction.begin();
             Cliente cliente = consultarCliente(idCliente);
             if (cliente != null) {
                 em.remove(cliente);
             }
-            em.getTransaction().commit();
+            transaction.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
-            throw new RuntimeException("Error al eliminar el cliente: " + e.getMessage());
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Error al eliminar el cliente: " + e.getMessage(), e);
         }
     }
 }

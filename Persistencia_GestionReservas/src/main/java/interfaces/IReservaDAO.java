@@ -4,10 +4,18 @@
  */
 package interfaces;
 
-/**
- *
- * @author danie
- */
+import entidades.Reserva;
+import java.util.List;
+
 public interface IReservaDAO {
     
+    void agregarReserva(Reserva reserva);
+    
+    Reserva consultarReserva(Long idReserva);
+    
+    List<Reserva> consultarTodasLasReservas();
+    
+    void actualizarReserva(Reserva reserva);
+    
+    void eliminarReserva(Long idReserva);
 }

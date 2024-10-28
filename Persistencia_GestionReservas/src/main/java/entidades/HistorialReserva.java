@@ -5,28 +5,20 @@
 package entidades;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
-/**
- *
- * @author danie
- */
 @Entity
 public class HistorialReserva implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Cambio de AUTO a IDENTITY para generación de ID
     private Long id;
 
     // Relación muchos a uno con Reserva.
     @ManyToOne
-    @JoinColumn(name = "id_reserva") // Este será el nombre de la columna en la tabla HistorialReserva.
+    @JoinColumn(name = "id_reserva", nullable = false) // Hacer la columna no nula
     private Reserva reserva;
 
     public Long getId() {
@@ -42,14 +34,15 @@ public class HistorialReserva implements Serializable {
     }
 
     public void setReserva(Reserva reserva) {
+        if (reserva == null) {
+            throw new IllegalArgumentException("La reserva no puede ser nula.");
+        }
         this.reserva = reserva;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return (id != null) ? id.hashCode() : 0;
     }
 
     @Override
@@ -58,14 +51,11 @@ public class HistorialReserva implements Serializable {
             return false;
         }
         HistorialReserva other = (HistorialReserva) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return (this.id != null || other.id == null) && (this.id == null || this.id.equals(other.id));
     }
 
     @Override
     public String toString() {
-        return "entidades.HistorialReserva[ id=" + id + " ]";
+        return "HistorialReserva{id=" + id + ", reserva=" + (reserva != null ? reserva.getId() : "null") + "}";
     }
 }

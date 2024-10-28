@@ -6,6 +6,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +15,22 @@ import java.util.List;
 public class Reserva implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Cambiado a IDENTITY para mejor gestión de IDs
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "mesa_id") // Nombre de la columna en la tabla de Reserva
+    @JoinColumn(name = "mesa_id", nullable = false) // Hacer la columna no nula
     private Mesa mesa;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id") // Nombre de la columna en la tabla de Reserva
+    @JoinColumn(name = "cliente_id", nullable = false) // Hacer la columna no nula
     private Cliente cliente;
+
+    private LocalDateTime fechaHora; // Fecha y hora de la reserva
+    private int numeroPersonas; // Número de personas para la reserva
+    private double costo; // Costo de la reserva
 
     @OneToMany(mappedBy = "reserva", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<HistorialReserva> historialReservas = new ArrayList<>();
@@ -42,6 +48,9 @@ public class Reserva implements Serializable {
     }
 
     public void setMesa(Mesa mesa) {
+        if (mesa == null) {
+            throw new IllegalArgumentException("La mesa no puede ser nula.");
+        }
         this.mesa = mesa;
     }
 
@@ -50,14 +59,48 @@ public class Reserva implements Serializable {
     }
 
     public void setCliente(Cliente cliente) {
+        if (cliente == null) {
+            throw new IllegalArgumentException("El cliente no puede ser nulo.");
+        }
         this.cliente = cliente;
+    }
+
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
+    }
+
+    public void setFechaHora(LocalDateTime fechaHora) {
+        if (fechaHora == null) {
+            throw new IllegalArgumentException("La fecha y hora de la reserva no pueden ser nulas.");
+        }
+        this.fechaHora = fechaHora;
+    }
+
+    public int getNumeroPersonas() {
+        return numeroPersonas;
+    }
+
+    public void setNumeroPersonas(int numeroPersonas) {
+        if (numeroPersonas <= 0) {
+            throw new IllegalArgumentException("El número de personas debe ser mayor que cero.");
+        }
+        this.numeroPersonas = numeroPersonas;
+    }
+
+    public double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(double costo) {
+        if (costo < 0) {
+            throw new IllegalArgumentException("El costo no puede ser negativo.");
+        }
+        this.costo = costo;
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return (id != null) ? id.hashCode() : 0;
     }
 
     @Override
@@ -66,14 +109,11 @@ public class Reserva implements Serializable {
             return false;
         }
         Reserva other = (Reserva) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return (this.id != null || other.id == null) && (this.id == null || this.id.equals(other.id));
     }
 
     @Override
     public String toString() {
-        return "entidades.Reserva[ id=" + id + " ]";
+        return "Reserva{id=" + id + ", fechaHora=" + fechaHora + ", numeroPersonas=" + numeroPersonas + ", costo=" + costo + "}";
     }
 }
