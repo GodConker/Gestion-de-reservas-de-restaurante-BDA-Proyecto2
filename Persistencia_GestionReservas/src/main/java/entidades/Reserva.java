@@ -6,9 +6,9 @@
 package entidades;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -17,43 +17,24 @@ public class Reserva implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Cambiado a IDENTITY para mejor gestión de IDs
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "mesa_id") // Nombre de la columna en la tabla de Reserva
+    @JoinColumn(name = "mesa_id", nullable = false) // Hacer la columna no nula
     private Mesa mesa;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id") // Nombre de la columna en la tabla de Reserva
+    @JoinColumn(name = "cliente_id", nullable = false) // Hacer la columna no nula
     private Cliente cliente;
+
+    private LocalDateTime fechaHora; // Fecha y hora de la reserva
+    private int numeroPersonas; // Número de personas para la reserva
+    private double costo; // Costo de la reserva
 
     @OneToMany(mappedBy = "reserva", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<HistorialReserva> historialReservas = new ArrayList<>();
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaHora; // Fecha y hora de la creación de la reserva
-
-    @Temporal(TemporalType.DATE)
-    private Date fechaReserva; // Atributo para la fecha de la reserva
-
-    private int numPersonas; // Atributo para el número de personas
-    
-    private int costo; // Atributo para el costo de la reserva
-
-    public Reserva() {}
-
-    public Reserva(Long id, Mesa mesa, Cliente cliente, Date fechaHora, Date fechaReserva, int numPersonas, int costo) {
-        this.id = id;
-        this.mesa = mesa;
-        this.cliente = cliente;
-        this.fechaHora = fechaHora;
-        this.fechaReserva = fechaReserva; // Inicializar la fecha de la reserva
-        this.numPersonas = numPersonas;
-        this.costo = costo; // Inicializar el costo
-    }
-
-    // Métodos Getters y Setters
     public Long getId() {
         return id;
     }
@@ -67,6 +48,9 @@ public class Reserva implements Serializable {
     }
 
     public void setMesa(Mesa mesa) {
+        if (mesa == null) {
+            throw new IllegalArgumentException("La mesa no puede ser nula.");
+        }
         this.mesa = mesa;
     }
 
@@ -75,59 +59,43 @@ public class Reserva implements Serializable {
     }
 
     public void setCliente(Cliente cliente) {
+        if (cliente == null) {
+            throw new IllegalArgumentException("El cliente no puede ser nulo.");
+        }
         this.cliente = cliente;
     }
 
-    public Date getFechaHora() {
+    public LocalDateTime getFechaHora() {
         return fechaHora;
     }
 
-    public void setFechaHora(Date fechaHora) {
+    public void setFechaHora(LocalDateTime fechaHora) {
+        if (fechaHora == null) {
+            throw new IllegalArgumentException("La fecha y hora de la reserva no pueden ser nulas.");
+        }
         this.fechaHora = fechaHora;
     }
 
-    public Date getFechaReserva() {
-        return fechaReserva;
+    public int getNumeroPersonas() {
+        return numeroPersonas;
     }
 
-    public void setFechaReserva(Date fechaReserva) {
-        this.fechaReserva = fechaReserva;
-    }
-
-    public int getNumPersonas() {
-        return numPersonas;
-    }
-
-    public void setNumPersonas(int numPersonas) {
-        if (numPersonas <= 0) {
+    public void setNumeroPersonas(int numeroPersonas) {
+        if (numeroPersonas <= 0) {
             throw new IllegalArgumentException("El número de personas debe ser mayor que cero.");
         }
-        this.numPersonas = numPersonas;
+        this.numeroPersonas = numeroPersonas;
     }
 
-    public int getCosto() {
+    public double getCosto() {
         return costo;
     }
 
-    public void setCosto(int costo) {
+    public void setCosto(double costo) {
         if (costo < 0) {
             throw new IllegalArgumentException("El costo no puede ser negativo.");
         }
         this.costo = costo;
-    }
-
-    // Método para obtener la ubicación de la mesa
-    public String getUbicacionMesa() {
-        if (mesa != null) {
-            return mesa.getUbicacion();
-        }
-        return null; 
-    }
-
-    // Método para agregar un historial a la reserva
-    public void agregarHistorialReserva(HistorialReserva historial) {
-        historialReservas.add(historial);
-        historial.setReserva(this); // Establecer la relación inversa
     }
 
     @Override
@@ -146,6 +114,6 @@ public class Reserva implements Serializable {
 
     @Override
     public String toString() {
-        return "entidades.Reserva[ id=" + id + ", numPersonas=" + numPersonas + ", costo=" + costo + " ]";
+        return "Reserva{id=" + id + ", fechaHora=" + fechaHora + ", numeroPersonas=" + numeroPersonas + ", costo=" + costo + "}";
     }
 }

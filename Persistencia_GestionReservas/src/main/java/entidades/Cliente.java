@@ -13,6 +13,7 @@ import java.util.List;
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,6 +37,9 @@ public class Cliente implements Serializable {
     }
 
     public void setNombreCompleto(String nombreCompleto) {
+        if (nombreCompleto == null || nombreCompleto.trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre completo no puede estar vacío.");
+        }
         this.nombreCompleto = nombreCompleto;
     }
 
@@ -44,6 +48,9 @@ public class Cliente implements Serializable {
     }
 
     public void setTelefono(String telefono) {
+        if (telefono == null || telefono.trim().isEmpty()) {
+            throw new IllegalArgumentException("El teléfono no puede estar vacío.");
+        }
         this.telefono = telefono;
     }
 
@@ -52,14 +59,28 @@ public class Cliente implements Serializable {
     }
 
     public void setReservas(List<Reserva> reservas) {
+        if (reservas == null) {
+            throw new IllegalArgumentException("La lista de reservas no puede ser nula.");
+        }
         this.reservas = reservas;
+    }
+
+    public void agregarReserva(Reserva reserva) {
+        if (reserva != null) {
+            reservas.add(reserva);
+            reserva.setCliente(this); // Asegura que la reserva conozca al cliente
+        }
+    }
+
+    public void eliminarReserva(Reserva reserva) {
+        if (reservas.remove(reserva)) {
+            reserva.setCliente(null); // Desvincula la reserva del cliente
+        }
     }
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return (id != null) ? id.hashCode() : 0;
     }
 
     @Override
@@ -68,14 +89,11 @@ public class Cliente implements Serializable {
             return false;
         }
         Cliente other = (Cliente) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return (this.id != null || other.id == null) && (this.id == null || this.id.equals(other.id));
     }
 
     @Override
     public String toString() {
-        return "entidades.Cliente[ id=" + id + " ]";
+        return "Cliente{id=" + id + ", nombreCompleto='" + nombreCompleto + "', telefono='" + telefono + "'}";
     }
 }

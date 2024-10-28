@@ -4,30 +4,68 @@
  */
 package daos;
 
-import dtos.MesaDTO;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import entidades.Mesa;
+import javax.persistence.*;
+import java.util.List;
 
-/**
- *
- * @author danie
- */
 public class MesaDAO {
-    
+
     @PersistenceContext
     private EntityManager em;
-    
-    public MesaDTO obtenerPorId(int idMesa) {
-        return em.find(MesaDTO.class, idMesa);
+
+    public MesaDAO(EntityManager em) {
+        this.em = em;
     }
-    
-    public MesaDTO buscarMesaPorTipo(String tipoMesa) {
-        TypedQuery<MesaDTO> query = em.createQuery(
-            "SELECT m FROM Mesa m WHERE m.tipoMesa = :tipoMesa", MesaDTO.class);
-        query.setParameter("tipoMesa", tipoMesa);
-        
-        // Obtener un solo resultado, o null si no se encuentra
-        return query.getResultStream().findFirst().orElse(null);
+
+    public void agregarMesa(Mesa mesa) {
+        try {
+            em.getTransaction().begin();
+            em.persist(mesa);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new RuntimeException("Error al agregar la mesa: " + e.getMessage());
+        }
+    }
+
+    public Mesa consultarMesa(Long idMesa) {
+        try {
+            return em.find(Mesa.class, idMesa);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al consultar la mesa: " + e.getMessage());
+        }
+    }
+
+    public List<Mesa> consultarTodasLasMesas() {
+        try {
+            return em.createQuery("SELECT m FROM Mesa m", Mesa.class).getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Error al consultar las mesas: " + e.getMessage());
+        }
+    }
+
+    public void actualizarMesa(Mesa mesa) {
+        try {
+            em.getTransaction().begin();
+            em.merge(mesa);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new RuntimeException("Error al actualizar la mesa: " + e.getMessage());
+        }
+    }
+
+    public void eliminarMesa(Long idMesa) {
+        try {
+            em.getTransaction().begin();
+            Mesa mesa = consultarMesa(idMesa);
+            if (mesa != null) {
+                em.remove(mesa);
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new RuntimeException("Error al eliminar la mesa: " + e.getMessage());
+        }
     }
 }

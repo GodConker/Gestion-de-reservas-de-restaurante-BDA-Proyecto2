@@ -4,10 +4,18 @@
  */
 package interfaces;
 
-/**
- *
- * @author danie
- */
+import entidades.Restaurante;
+import java.util.List;
+
 public interface IRestauranteDAO {
     
+    void agregarRestaurante(Restaurante restaurante);
+    
+    Restaurante consultarRestaurante(Long idRestaurante);
+    
+    List<Restaurante> consultarTodosLosRestaurantes();
+    
+    void actualizarRestaurante(Restaurante restaurante);
+    
+    void eliminarRestaurante(Long idRestaurante);
 }

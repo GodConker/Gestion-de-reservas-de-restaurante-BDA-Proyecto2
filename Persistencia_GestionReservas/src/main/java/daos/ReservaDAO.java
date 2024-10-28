@@ -5,48 +5,67 @@
 package daos;
 
 import entidades.Reserva;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.*;
+import java.util.List;
 
-/**
- *
- * @author danie
- */
 public class ReservaDAO {
 
-    private EntityManager entityManager;
-    
-    public ReservaDAO(){}
-    
-    public ReservaDAO(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    @PersistenceContext
+    private EntityManager em;
+
+    public ReservaDAO(EntityManager em) {
+        this.em = em;
     }
 
-    public void guardarReserva(Reserva reserva) {
-        EntityTransaction transaction = entityManager.getTransaction();
-        try {
-            transaction.begin();
-            entityManager.persist(reserva);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
-    }
-    
     public void agregarReserva(Reserva reserva) {
         try {
-            entityManager.getTransaction().begin();
-            // Guardar la nueva reserva en la base de datos
-            entityManager.persist(reserva);
-            entityManager.getTransaction().commit();
+            em.getTransaction().begin();
+            em.persist(reserva);
+            em.getTransaction().commit();
         } catch (Exception e) {
-            if (entityManager.getTransaction().isActive()) {
-                entityManager.getTransaction().rollback(); // Rollback en caso de error
-            }
+            em.getTransaction().rollback();
             throw new RuntimeException("Error al agregar la reserva: " + e.getMessage());
+        }
+    }
+
+    public Reserva consultarReserva(Long idReserva) {
+        try {
+            return em.find(Reserva.class, idReserva);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al consultar la reserva: " + e.getMessage());
+        }
+    }
+
+    public List<Reserva> consultarTodasLasReservas() {
+        try {
+            return em.createQuery("SELECT r FROM Reserva r", Reserva.class).getResultList();
+        } catch (Exception e) {
+            throw new RuntimeException("Error al consultar las reservas: " + e.getMessage());
+        }
+    }
+
+    public void actualizarReserva(Reserva reserva) {
+        try {
+            em.getTransaction().begin();
+            em.merge(reserva);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new RuntimeException("Error al actualizar la reserva: " + e.getMessage());
+        }
+    }
+
+    public void eliminarReserva(Long idReserva) {
+        try {
+            em.getTransaction().begin();
+            Reserva reserva = consultarReserva(idReserva);
+            if (reserva != null) {
+                em.remove(reserva);
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            throw new RuntimeException("Error al eliminar la reserva: " + e.getMessage());
         }
     }
 }

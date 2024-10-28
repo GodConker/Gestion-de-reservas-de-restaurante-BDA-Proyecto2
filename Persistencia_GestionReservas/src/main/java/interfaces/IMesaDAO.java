@@ -4,10 +4,18 @@
  */
 package interfaces;
 
-/**
- *
- * @author danie
- */
+import entidades.Mesa;
+import java.util.List;
+
 public interface IMesaDAO {
     
+    void agregarMesa(Mesa mesa);
+    
+    Mesa consultarMesa(Long idMesa);
+    
+    List<Mesa> consultarTodasLasMesas();
+    
+    void actualizarMesa(Mesa mesa);
+    
+    void eliminarMesa(Long idMesa);
 }
