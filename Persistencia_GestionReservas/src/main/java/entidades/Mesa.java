@@ -19,6 +19,27 @@ public class Mesa implements Serializable {
     @JoinColumn(name = "restaurante_id") // Nombre de la columna en la tabla de Mesa
     private Restaurante restaurante;
 
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    private String tipo; // Atributo para el tipo de mesa
+    private String ubicacion;
+    
+    public Mesa(){}
+
+    public Mesa(Long id, Restaurante restaurante, String ubicacion) {
+        this.id = id;
+        this.restaurante = restaurante;
+        this.ubicacion = ubicacion;
+    }
+    
+    
+
     public Long getId() {
         return id;
     }
@@ -33,6 +54,14 @@ public class Mesa implements Serializable {
 
     public void setRestaurante(Restaurante restaurante) {
         this.restaurante = restaurante;
+    }
+    
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     @Override

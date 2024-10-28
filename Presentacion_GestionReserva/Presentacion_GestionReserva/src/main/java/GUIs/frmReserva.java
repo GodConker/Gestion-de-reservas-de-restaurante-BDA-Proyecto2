@@ -3,9 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package GUIs;
- 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+
+import business.objects.ReservaBO;
 
 /**
  *
@@ -19,7 +18,9 @@ public class frmReserva extends javax.swing.JFrame {
     public frmReserva() {
         initComponents();
         this.setLocationRelativeTo(null); // Centra el frame en la pantalla
+
     }
+    ReservaBO reservaBO = new ReservaBO();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -287,62 +288,60 @@ public class frmReserva extends javax.swing.JFrame {
 
     private void BtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCancelarActionPerformed
 // Verificar si todos los campos están vacíos
-    if (TxtfNombreCompleto.getText().isEmpty() &&
-        TxtfTelefono.getText().isEmpty() &&
-        CBXNumPersonas.getSelectedItem().toString().equals("0") &&
-        TxtfTipoMesa.getText().isEmpty() &&
-        TxtfCostoTotal.getText().isEmpty() &&
-        DTPFechaHora.getDateTimeStrict() == null) {
-        
-        // Mostrar mensaje si todos los campos están vacíos
-        javax.swing.JOptionPane.showMessageDialog(this,
-                "Por favor, llena al menos un campo antes de cancelar.",
-                "Advertencia",
-                javax.swing.JOptionPane.WARNING_MESSAGE);
-    } else {
-        // Mostrar un cuadro de diálogo de confirmación
-        int respuesta = javax.swing.JOptionPane.showConfirmDialog(this,
-                "¿Estás seguro de que deseas cancelar?",
-                "Confirmar Cancelación",
-                javax.swing.JOptionPane.YES_NO_OPTION);
-        
-        // Si el usuario selecciona 'Sí'
-        if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
-            // Limpiar todos los campos
-            TxtfNombreCompleto.setText("");
-            TxtfTelefono.setText("");
-            
-            // Limpiar los campos de tipo de mesa y costo total
-            TxtfTipoMesa.setText(""); // Limpiar tipo de mesa
-            TxtfCostoTotal.setText(""); // Limpiar costo total
-            
-            // Cambiar a editable para poder limpiar los campos no editables
-            TxtfTipoMesa.setEditable(true);
-            TxtfCostoTotal.setEditable(true);
-            
-            // Restablecer a la opción por defecto
-            CBXNumPersonas.setSelectedIndex(0);
-            CBXUbicacion.setSelectedIndex(0);
-            
-            // Limpiar el DateTimePicker
-            DTPFechaHora.setDateTimeStrict(null);
-            
-            // Volver a establecer como no editable si es necesario
-            TxtfTipoMesa.setEditable(false);
-            TxtfCostoTotal.setEditable(false);
+        if (TxtfNombreCompleto.getText().isEmpty()
+                && TxtfTelefono.getText().isEmpty()
+                && CBXNumPersonas.getSelectedItem().toString().equals("0")
+                && TxtfTipoMesa.getText().isEmpty()
+                && TxtfCostoTotal.getText().isEmpty()
+                && DTPFechaHora.getDateTimeStrict() == null) {
+
+            // Mostrar mensaje si todos los campos están vacíos
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Por favor, llena al menos un campo antes de cancelar.",
+                    "Advertencia",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+        } else {
+            // Mostrar un cuadro de diálogo de confirmación
+            int respuesta = javax.swing.JOptionPane.showConfirmDialog(this,
+                    "¿Estás seguro de que deseas cancelar?",
+                    "Confirmar Cancelación",
+                    javax.swing.JOptionPane.YES_NO_OPTION);
+
+            // Si el usuario selecciona 'Sí'
+            if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+                // Limpiar todos los campos
+                TxtfNombreCompleto.setText("");
+                TxtfTelefono.setText("");
+
+                // Limpiar los campos de tipo de mesa y costo total
+                TxtfTipoMesa.setText(""); // Limpiar tipo de mesa
+                TxtfCostoTotal.setText(""); // Limpiar costo total
+
+                // Cambiar a editable para poder limpiar los campos no editables
+                TxtfTipoMesa.setEditable(true);
+                TxtfCostoTotal.setEditable(true);
+
+                // Restablecer a la opción por defecto
+                CBXNumPersonas.setSelectedIndex(0);
+                CBXUbicacion.setSelectedIndex(0);
+
+                // Limpiar el DateTimePicker
+                DTPFechaHora.setDateTimeStrict(null);
+
+                // Volver a establecer como no editable si es necesario
+                TxtfTipoMesa.setEditable(false);
+                TxtfCostoTotal.setEditable(false);
+            }
         }
-    }
     }//GEN-LAST:event_BtnCancelarActionPerformed
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
-// Verificar si los campos están llenos
-    if (TxtfNombreCompleto.getText().isEmpty() ||
-        TxtfTelefono.getText().isEmpty() ||
-        CBXNumPersonas.getSelectedItem().toString().equals("0") ||
-        TxtfTipoMesa.getText().isEmpty() ||
-        TxtfCostoTotal.getText().isEmpty() ||
-        DTPFechaHora.getDateTimeStrict() == null) {
-        
+        // Verificar si los campos están llenos
+    if (TxtfNombreCompleto.getText().isEmpty()
+            || TxtfTelefono.getText().isEmpty()
+            || CBXNumPersonas.getSelectedItem().toString().equals("0")
+            || DTPFechaHora.getDateTimeStrict() == null) {
+
         // Mostrar mensaje si hay campos vacíos
         javax.swing.JOptionPane.showMessageDialog(this,
                 "Por favor, llena todos los campos requeridos.",
@@ -351,43 +350,60 @@ public class frmReserva extends javax.swing.JFrame {
         return; // Salir del método
     }
 
-    // Obtener los datos de la reservación
-    String nombre = TxtfNombreCompleto.getText();
-    String telefono = TxtfTelefono.getText();
-    String numPersonas = CBXNumPersonas.getSelectedItem().toString();
-    String tipoMesa = TxtfTipoMesa.getText();
-    String ubicacion = CBXUbicacion.getSelectedItem().toString();
-    String costoTotal = TxtfCostoTotal.getText();
+    try {
+        // Obtener los datos del formulario
+        String nombre = TxtfNombreCompleto.getText();
+        String telefono = TxtfTelefono.getText();
+        int numPersonas = Integer.parseInt(CBXNumPersonas.getSelectedItem().toString());
 
-    // Obtener la fecha y hora seleccionadas
-    LocalDateTime fechaHora = DTPFechaHora.getDateTimeStrict(); // Obtener el objeto LocalDateTime
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"); // Definir el formato deseado
-    String fechaHoraString = fechaHora.format(formatter); // Formatear a String
+        // Definir tamaño de mesa y costo basado en número de personas
+        String tipoMesa;
+        int costoTotal;
+        if (numPersonas >= 1 && numPersonas <= 2) {
+            tipoMesa = "Pequeña";
+            costoTotal = 300;
+        } else if (numPersonas >= 3 && numPersonas <= 4) {
+            tipoMesa = "Mediana";
+            costoTotal = 500;
+        } else if (numPersonas >= 5 && numPersonas <= 8) {
+            tipoMesa = "Grande";
+            costoTotal = 700;
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Número de personas no válido para la reservación.",
+                "Error",
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+            return; // Salir del método si el número de personas no es válido
+        }
 
-    // Crear el ticket de reservación
-    String ticket = "----- RESERVA ----\n"
-            + "Nombre Completo: " + nombre + "\n"
-            + "Teléfono: " + telefono + "\n"
-            + "Número de Personas: " + numPersonas + "\n"
-            + "Tipo de Mesa: " + tipoMesa + "\n"
-            + "Ubicación: " + ubicacion + "\n"
-            + "Costo Total: $" + costoTotal + "\n"
-            + "Fecha y Hora: " + fechaHoraString + "\n" // Agregar la fecha y hora formateadas al ticket
-            + "--------------------\n"
-            + "¿Estás de acuerdo con la reservación?";
+        // Crear el ticket de reserva
+        String ticket = "----- RESERVA ----\n"
+                + "Nombre Completo: " + nombre + "\n"
+                + "Teléfono: " + telefono + "\n"
+                + "Número de Personas: " + numPersonas + "\n"
+                + "Tipo de Mesa: " + tipoMesa + "\n"
+                + "Costo Total: $" + costoTotal + "\n"
+                + "Fecha y Hora: " + DTPFechaHora.getDateTimeStrict() + "\n"
+                + "--------------------\n"
+                + "¿Estás de acuerdo con la reservación?";
 
-    // Mostrar un cuadro de diálogo con el ticket y preguntar si está de acuerdo
-    int respuesta = javax.swing.JOptionPane.showConfirmDialog(this, ticket, "Confirmar Reservación", javax.swing.JOptionPane.YES_NO_OPTION);
+        // Mostrar cuadro de diálogo con el ticket
+        int respuesta = javax.swing.JOptionPane.showConfirmDialog(this, ticket, "Confirmar Reservación", javax.swing.JOptionPane.YES_NO_OPTION);
 
-    // Si el usuario confirma (Opción 'Sí')
-    if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
-        // Mostrar mensaje de confirmación
-        javax.swing.JOptionPane.showMessageDialog(this, "Reservación confirmada con éxito");
+        if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+            // Confirmar la reserva a través de la capa de negocio
+            reservaBO.confirmarReserva(nombre, telefono, tipoMesa, costoTotal, numPersonas);
 
-        // Regresar al menú
-        frmMenu menuFrame = new frmMenu();
-        menuFrame.setVisible(true);
-        this.dispose(); // Cerrar el frame de reservación
+            javax.swing.JOptionPane.showMessageDialog(this, "Reservación confirmada con éxito");
+
+            // Regresar al menú
+            frmMenu menuFrame = new frmMenu();
+            menuFrame.setVisible(true);
+            this.dispose();
+        }
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al confirmar la reservación: " + e.getMessage(),
+                                                  "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 

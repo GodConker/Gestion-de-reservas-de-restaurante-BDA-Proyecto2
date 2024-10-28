@@ -5,6 +5,7 @@
 package business.objects;
 
 import daos.ClienteDAO;
+import dtos.ClienteDTO;
 import entidades.Cliente;
 import java.util.List;
 
@@ -13,8 +14,11 @@ import java.util.List;
  * @author danie
  */
 public class ClienteBO {
-    
-     private ClienteDAO clienteDAO;
+
+    private ClienteDAO clienteDAO;
+
+    public ClienteBO() {
+    }
 
     public ClienteBO(ClienteDAO clienteDAO) {
         this.clienteDAO = clienteDAO;
@@ -58,5 +62,16 @@ public class ClienteBO {
         }
         clienteDAO.eliminarCliente(idCliente);
     }
-}
 
+    public ClienteDTO buscarClientePorNombre(String nombre) throws Exception {
+        ClienteDTO clienteDTO = clienteDAO.obtenerPorNombre(nombre);
+        if (clienteDTO == null) {
+            throw new Exception("Cliente no encontrado.");
+        }
+        return clienteDTO;
+    }
+
+    public ClienteDTO buscarClientePorNombreYTelefono(String nombre, String telefono) {
+        return clienteDAO.buscarClientePorNombreYTelefono(nombre, telefono);
+    }
+}

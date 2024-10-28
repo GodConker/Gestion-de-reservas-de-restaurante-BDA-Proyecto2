@@ -29,6 +29,11 @@ public class HistorialReserva implements Serializable {
     @JoinColumn(name = "id_reserva") // Este será el nombre de la columna en la tabla HistorialReserva.
     private Reserva reserva;
 
+    public HistorialReserva(Long id, Reserva reserva) {
+        this.id = id;
+        this.reserva = reserva;
+    }
+
     public Long getId() {
         return id;
     }

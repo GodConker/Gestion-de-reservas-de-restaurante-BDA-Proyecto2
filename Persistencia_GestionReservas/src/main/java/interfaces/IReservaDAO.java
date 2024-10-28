@@ -4,10 +4,13 @@
  */
 package interfaces;
 
+import entidades.Reserva;
+import java.sql.SQLException;
+
 /**
  *
  * @author danie
  */
 public interface IReservaDAO {
-    
+    public void agregarReserva(Reserva reserva) throws SQLException;
 }

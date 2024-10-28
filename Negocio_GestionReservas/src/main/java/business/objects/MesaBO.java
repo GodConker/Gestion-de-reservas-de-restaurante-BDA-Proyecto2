@@ -4,10 +4,26 @@
  */
 package business.objects;
 
+import daos.MesaDAO;
+import dtos.MesaDTO;
+
 /**
  *
  * @author danie
  */
 public class MesaBO {
-    
+
+    private MesaDAO mesaDAO;
+
+    public MesaDTO buscarMesaPorId(int idMesa) throws Exception {
+        MesaDTO mesaDTO = mesaDAO.obtenerPorId(idMesa);
+        if (mesaDTO == null) {
+            throw new Exception("Mesa no encontrada.");
+        }
+        return mesaDTO;
+    }
+
+    public MesaDTO buscarMesaPorTipo(String tipoMesa) {
+        return mesaDAO.buscarMesaPorTipo(tipoMesa);
+    }
 }

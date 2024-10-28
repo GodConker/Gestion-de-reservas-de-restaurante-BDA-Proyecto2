@@ -9,6 +9,7 @@ package daos;
  * @author danie
  */
 
+import dtos.ClienteDTO;
 import entidades.Cliente;
 import javax.persistence.*;
 import java.util.List;
@@ -72,5 +73,25 @@ public class ClienteDAO {
             em.getTransaction().rollback();
             throw new RuntimeException("Error al eliminar el cliente: " + e.getMessage());
         }
+    }
+    
+    public ClienteDTO obtenerPorNombre(String nombre) {
+        try {
+            return em.createQuery("SELECT c FROM Cliente c WHERE c.nombre = :nombre", ClienteDTO.class)
+                    .setParameter("nombre", nombre)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // Retorna null si no encuentra el cliente
+        }
+    }
+    
+    public ClienteDTO buscarClientePorNombreYTelefono(String nombre, String telefono) {
+        TypedQuery<ClienteDTO> query = em.createQuery(
+            "SELECT c FROM Cliente c WHERE c.nombre = :nombre AND c.telefono = :telefono", ClienteDTO.class);
+        query.setParameter("nombre", nombre);
+        query.setParameter("telefono", telefono);
+        
+        // Obtener un solo resultado, o null si no se encuentra
+        return query.getResultStream().findFirst().orElse(null);
     }
 }
