@@ -4,7 +4,14 @@
  */
 package GUIs;
 
-/** 
+import business.objects.ReservaBO;
+import dtos.ReservaDTO;
+import java.time.LocalDate;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+/**
  *
  * @author Dell
  */
@@ -17,6 +24,25 @@ public class frmConsultas extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null); // Esto centra la ventana
 
+    }
+
+    private void mostrarResultados(List<ReservaDTO> reservas) {
+        DefaultTableModel model = (DefaultTableModel) TableModuloConsultas.getModel();
+        model.setRowCount(0); // Limpiar la tabla
+
+        for (ReservaDTO reserva : reservas) {
+            model.addRow(new Object[]{
+                reserva.getNombreCliente(),
+                reserva.getTelefonoCliente(),
+                reserva.getFechaReserva(),
+                reserva.getHoraReserva(),
+                reserva.getNumPersonas(),
+                reserva.getCosto(),
+                reserva.getEstadoReserva(),
+                reserva.getMulta(),
+                reserva.getIdMesa()
+            });
+        }
     }
 
     /**
@@ -161,13 +187,13 @@ public class frmConsultas extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 200, -1));
-        jPanel1.add(DPFechaReservadaHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 180, 20));
+        jPanel1.add(DPFechaReservadaHasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 200, 40));
 
         jLabel15.setText("Tipo de Mesa:");
         jLabel15.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 130, -1, 20));
-        jPanel1.add(DPFechaReservadaDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 180, 20));
+        jPanel1.add(DPFechaReservadaDesde, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 180, 40));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 700, 20));
 
         jLabel16.setText("Fecha Reservada desde:");
@@ -176,10 +202,20 @@ public class frmConsultas extends javax.swing.JFrame {
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 240, -1));
 
         BtnLimpiar.setText("Limpiar");
-        jPanel1.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 120, -1));
+        BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLimpiarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 120, -1));
 
         BtnBuscar.setText("Buscar");
-        jPanel1.add(BtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 120, -1));
+        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 120, -1));
         jPanel1.add(TxtfBuscarNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 200, -1));
         jPanel1.add(TxtfNumTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, 210, -1));
 
@@ -212,6 +248,51 @@ public class frmConsultas extends javax.swing.JFrame {
 
         this.dispose();
     }//GEN-LAST:event_BtnHistorialActionPerformed
+
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+        // TODO add your handling code here:
+        // Obtener los valores de los filtros
+        String nombre = TxtfBuscarNombreCliente.getText();
+        String telefono = TxtfNumTelefono.getText();
+        LocalDate fechaDesde = DPFechaReservadaDesde.getDate() != null ? DPFechaReservadaDesde.getDate() : null;
+        LocalDate fechaHasta = DPFechaReservadaHasta.getDate() != null ? DPFechaReservadaHasta.getDate() : null;
+
+        // Obtener filtro de área
+        String area = CBXFiltroArea.getSelectedItem().toString();
+        if ("Todos".equals(area)) {
+            area = null;  // Ignorar filtro si se selecciona "Todos"
+        }
+
+        String tipoMesaSeleccionado = CBXTipoMesa.getSelectedItem().toString();
+        Integer tipoMesa = null;
+
+        switch (tipoMesaSeleccionado) {
+            case "Pequeña" -> tipoMesa = 1;
+            case "Mediana" -> tipoMesa = 2;
+            case "Grande" -> tipoMesa = 3;
+            case "Todos" -> tipoMesa = null;
+        }
+
+        // Llamada al BO para obtener los resultados con los filtros aplicados
+        ReservaBO reservaBO = new ReservaBO();
+        try {
+            List<ReservaDTO> reservas = reservaBO.buscarReservas(nombre, telefono, fechaDesde, fechaHasta, area, tipoMesa);
+            mostrarResultados(reservas);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al buscar reservas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_BtnBuscarActionPerformed
+
+    private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
+        // TODO add your handling code here:
+        // Limpiar los campos de texto
+    TxtfBuscarNombreCliente.setText(""); // Limpiar el campo de búsqueda por nombre del cliente
+    TxtfNumTelefono.setText(""); // Limpiar el campo de número de teléfono
+
+    // Limpiar los DatePicker
+    DPFechaReservadaDesde.clear(); // Limpiar el DatePicker de fecha reservada desde
+    DPFechaReservadaHasta.clear(); // Limpiar el DatePicker de fecha reservada hasta
+    }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments

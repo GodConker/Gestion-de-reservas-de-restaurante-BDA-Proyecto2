@@ -7,7 +7,9 @@ package GUIs;
 
 import business.objects.ReservaBO;
 import dtos.ReservaDTO;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,6 +44,31 @@ public class frmCancelacion extends javax.swing.JFrame {
         };
         model.addRow(rowData);
     }
+    
+    private void llenarTablaConReservas(List<ReservaDTO> reservasDTO) {
+    // Limpiar la tabla antes de llenarla con nuevos datos
+    DefaultTableModel model = (DefaultTableModel) TableReservacionCancelar.getModel();
+    model.setRowCount(0); // Elimina todas las filas actuales en la tabla
+
+    // Iterar sobre la lista de reservasDTO y añadir cada reserva como una fila en la tabla
+    for (ReservaDTO reserva : reservasDTO) {
+        Object[] row = {
+            reserva.getIdReserva(),
+            reserva.getFechaReserva(),
+            reserva.getHoraReserva(),
+            reserva.getNumPersonas(),
+            reserva.getCosto(),
+            reserva.getEstadoReserva(),
+            reserva.getMulta(),
+            reserva.getIdCliente(),
+            reserva.getNombreCliente(), // Asumiendo que tienes un getter para el nombre del cliente
+            reserva.getIdMesa()
+        };
+
+        // Agregar la fila al modelo de la tabla
+        model.addRow(row);
+    }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,22 +123,22 @@ public class frmCancelacion extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(BtnRegresar)
-                .addGap(28, 28, 28)
+                .addGap(115, 115, 115)
                 .addComponent(jLabel2)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(BtnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 50, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 590, 70));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 710, 70));
 
         jLabel8.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -127,7 +154,7 @@ public class frmCancelacion extends javax.swing.JFrame {
                 BtnHistorialActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 310, 100, -1));
+        jPanel1.add(BtnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 310, 100, -1));
 
         BtnConfirmar.setText("Confirmar");
         BtnConfirmar.setBackground(new java.awt.Color(0, 0, 0));
@@ -138,12 +165,12 @@ public class frmCancelacion extends javax.swing.JFrame {
                 BtnConfirmarActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 100, -1));
+        jPanel1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 310, 100, -1));
 
         jLabel11.setText("Multa Calculada:");
         jLabel11.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
 
         BtnBuscarReservacion1.setText("Buscar");
         BtnBuscarReservacion1.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +178,7 @@ public class frmCancelacion extends javax.swing.JFrame {
                 BtnBuscarReservacion1ActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnBuscarReservacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 80, -1));
+        jPanel1.add(BtnBuscarReservacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 80, -1));
 
         TableReservacionCancelar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,13 +193,13 @@ public class frmCancelacion extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TableReservacionCancelar);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 490, 110));
-        jPanel1.add(TxtfMulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, 90, -1));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 490, 110));
+        jPanel1.add(TxtfMulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 90, -1));
 
+        jLabel9.setText("Buscar Reserva por ID:");
         jLabel9.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Buscar Reserva:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, 20));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, -1, 20));
 
         BtnBuscarReservacion.setText("Buscar");
         BtnBuscarReservacion.addActionListener(new java.awt.event.ActionListener() {
@@ -180,15 +207,15 @@ public class frmCancelacion extends javax.swing.JFrame {
                 BtnBuscarReservacionActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnBuscarReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 80, -1));
-        jPanel1.add(TxtfBuscarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 102, 310, 30));
-        jPanel1.add(DPBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 310, 30));
+        jPanel1.add(BtnBuscarReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 80, -1));
+        jPanel1.add(TxtfBuscarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 100, 310, 30));
+        jPanel1.add(DPBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 330, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,9 +288,8 @@ public class frmCancelacion extends javax.swing.JFrame {
         // Obtener la reserva seleccionada de la tabla
         int selectedRow = TableReservacionCancelar.getSelectedRow();
         if (selectedRow != -1) {
-            // Obtener el ID de la reserva seleccionada y convertirlo a Long
-            Integer idReservaInt = (Integer) TableReservacionCancelar.getValueAt(selectedRow, 0); // Cambia el índice según la columna de ID
-            Long idReserva = idReservaInt.longValue(); // Convertir a Long
+            // Obtener el ID de la reserva seleccionada
+            int idReserva = (Integer) TableReservacionCancelar.getValueAt(selectedRow, 0); // Cambia el índice según la columna de ID
 
             Date fechaCancelacion = new Date(); // O la fecha que desees usar para la cancelación
 
@@ -285,7 +311,33 @@ public class frmCancelacion extends javax.swing.JFrame {
 
     private void BtnBuscarReservacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarReservacion1ActionPerformed
         // TODO add your handling code here:
-        
+        // Obtener la fecha seleccionada del DatePicker
+        LocalDate fechaSeleccionada = DPBuscarFecha.getDate();
+
+        // Validar que se haya seleccionado una fecha
+        if (fechaSeleccionada == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una fecha", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return; // Salir del método si la fecha es nula
+        }
+
+        // Asumir que tienes una instancia de ReservaBO en algún lugar de tu clase
+        ReservaBO reservaBO = new ReservaBO();
+
+        try {
+            // Buscar las reservas por la fecha usando la capa de negocio
+            List<ReservaDTO> reservasDTO = reservaBO.buscarReservasPorFecha(fechaSeleccionada);
+
+            if (reservasDTO != null && !reservasDTO.isEmpty()) {
+                // Llenar la tabla con la información de las reservas
+                llenarTablaConReservas(reservasDTO); // Método que implementas para llenar la tabla
+            } else {
+                // Manejar el caso en que no se encuentran reservas
+                JOptionPane.showMessageDialog(this, "No se encontraron reservas para la fecha seleccionada", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
+            // Manejar cualquier excepción que pueda surgir al buscar las reservas
+            JOptionPane.showMessageDialog(this, "Error al buscar las reservas: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_BtnBuscarReservacion1ActionPerformed
 
     /**

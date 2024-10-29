@@ -6,156 +6,183 @@ package daos;
 
 import entidades.Reserva;
 import entidades.Restaurante;
+import java.time.LocalDate;
 import javax.persistence.*;
 import java.util.List;
 
 public class ReservaDAO {
 
-    private EntityManager em;
     private final EntityManagerFactory emf;
 
     public ReservaDAO() {
         emf = Persistence.createEntityManagerFactory("Persistencia_GestionReservasPU");
     }
 
-    public void setEntityManager(EntityManager em) {
-        this.em = em;
+    private EntityManager getEntityManager() {
+        return emf.createEntityManager();
     }
 
     public void crearReserva(Reserva reserva) throws Exception {
-        EntityManager emm = null; // Inicializar EntityManager a null
-
+        EntityManager em = getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
         try {
-            emm = emf.createEntityManager(); // Obtener una instancia de EntityManager
-            emm.getTransaction().begin();
-            emm.persist(reserva); // Guardar la reserva
-            emm.getTransaction().commit();
+            transaction.begin();
+            em.persist(reserva);
+            transaction.commit();
         } catch (Exception e) {
-            if (emm != null && emm.getTransaction().isActive()) {
-                emm.getTransaction().rollback(); // Revertir si hay un error
+            if (transaction.isActive()) {
+                transaction.rollback();
             }
             throw new Exception("Error al agregar la reserva: " + e.getMessage(), e);
         } finally {
-            if (emm != null && emm.isOpen()) {
-                emm.close(); // Cerrar el EntityManager si está abierto
-            }
+            em.close();
         }
     }
 
     public Reserva consultarReserva(Long idReserva) {
+        EntityManager em = getEntityManager();
         try {
             return em.find(Reserva.class, idReserva);
         } catch (Exception e) {
             throw new RuntimeException("Error al consultar la reserva: " + e.getMessage());
+        } finally {
+            em.close();
         }
     }
 
     public List<Reserva> consultarTodasLasReservas() {
+        EntityManager em = getEntityManager();
         try {
             return em.createQuery("SELECT r FROM Reserva r", Reserva.class).getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Error al consultar las reservas: " + e.getMessage());
+        } finally {
+            em.close();
         }
     }
 
     public void actualizarReserva(Reserva reserva) {
+        EntityManager em = getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
         try {
-            em.getTransaction().begin();
+            transaction.begin();
             em.merge(reserva);
-            em.getTransaction().commit();
+            transaction.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
             throw new RuntimeException("Error al actualizar la reserva: " + e.getMessage());
+        } finally {
+            em.close();
         }
     }
 
     public void eliminarReserva(Long idReserva) {
+        EntityManager em = getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
         try {
-            em.getTransaction().begin();
+            transaction.begin();
             Reserva reserva = consultarReserva(idReserva);
             if (reserva != null) {
                 em.remove(reserva);
             }
-            em.getTransaction().commit();
+            transaction.commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
             throw new RuntimeException("Error al eliminar la reserva: " + e.getMessage());
+        } finally {
+            em.close();
         }
     }
 
     public List<Restaurante> obtenerRestaurantes() {
-        EntityManager emm = emf.createEntityManager();
-        List<Restaurante> restaurantes = null;
-
+        EntityManager em = getEntityManager();
         try {
-            TypedQuery<Restaurante> query = emm.createQuery("SELECT r FROM Restaurante r", Restaurante.class);
-            restaurantes = query.getResultList();
+            TypedQuery<Restaurante> query = em.createQuery("SELECT r FROM Restaurante r", Restaurante.class);
+            return query.getResultList();
         } finally {
-            emm.close();
-        }
-
-        return restaurantes;
-    }
-
-    // Método para obtener una reserva por su ID
-    public Reserva obtenerReservaPorId(Long idReserva) {
-        try {
-            return em.find(Reserva.class, idReserva);
-        } catch (Exception e) {
-            throw new RuntimeException("Error al obtener la reserva por ID: " + e.getMessage());
-        }
-    }
-
-    // Método para cancelar la reserva
-    public void cancelarReserva(Long idReserva) {
-        EntityTransaction transaction = em.getTransaction();
-        try {
-            transaction.begin();
-            // Obtener la reserva
-            Reserva reserva = obtenerReservaPorId(idReserva);
-            if (reserva != null) {
-                // Cambiar el estado a CANCELADA
-                reserva.setEstadoReserva(Reserva.EstadoReserva.Cancelada);
-                em.merge(reserva); // Guardar los cambios
-            }
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction.isActive()) {
-                transaction.rollback(); // Deshacer cambios en caso de error
-            }
-            throw new RuntimeException("Error al cancelar la reserva: " + e.getMessage());
+            em.close();
         }
     }
 
     public Reserva buscarReservaPorId(int idReserva) {
-        EntityManager emm = null; // Inicializar EntityManager a null
-        Reserva reserva = null;
-
+        EntityManager em = getEntityManager();
         try {
-            emm = emf.createEntityManager(); // Obtener una instancia de EntityManager
-            emm.getTransaction().begin(); // Iniciar transacción
-
-            // Utilizar JPQL para buscar la reserva por su ID
-            TypedQuery<Reserva> query = emm.createQuery(
-                    "SELECT r FROM Reserva r WHERE r.idReserva = :id", Reserva.class);
-            query.setParameter("id", idReserva);
-            reserva = query.getSingleResult(); // Obtener el resultado
-
-            emm.getTransaction().commit(); // Confirmar la transacción
-        } catch (NoResultException e) {
-            System.out.println("Reserva no encontrada con ID: " + idReserva);
-            // Aquí puedes manejar lo que deseas hacer si no se encuentra la reserva
+            return em.find(Reserva.class, idReserva);
         } catch (Exception e) {
-            if (emm != null && emm.getTransaction().isActive()) {
-                emm.getTransaction().rollback(); // Revertir si hay un error
-            }
-            throw new RuntimeException("Error al buscar la reserva: " + e.getMessage(), e);
+            throw new RuntimeException("Error al obtener la reserva por ID: " + e.getMessage());
         } finally {
-            if (emm != null && emm.isOpen()) {
-                emm.close(); // Cerrar el EntityManager si está abierto
+            em.close();
+        }
+    }
+
+    public void cancelarReserva(int idReserva) {
+        EntityManager em = getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            Reserva reserva = buscarReservaPorId(idReserva);
+            if (reserva != null) {
+                reserva.setEstadoReserva(Reserva.EstadoReserva.Cancelada);
+                em.merge(reserva);
             }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new RuntimeException("Error al cancelar la reserva: " + e.getMessage());
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<Reserva> buscarReservas(String nombre, String telefono, LocalDate fechaDesde, LocalDate fechaHasta, String area, Integer tamanoMesa) {
+        EntityManager em = getEntityManager();
+        StringBuilder jpql = new StringBuilder("SELECT r FROM Reserva r WHERE 1=1");
+
+        if (nombre != null && !nombre.isEmpty()) {
+            jpql.append(" AND r.cliente.nombreCompleto LIKE :nombre");
+        }
+        if (telefono != null && !telefono.isEmpty()) {
+            jpql.append(" AND r.cliente.telefono = :telefono");
+        }
+        if (fechaDesde != null) {
+            jpql.append(" AND r.fechaReserva >= :fechaDesde");
+        }
+        if (fechaHasta != null) {
+            jpql.append(" AND r.fechaReserva <= :fechaHasta");
+        }
+        if (area != null && !area.isEmpty()) {
+            jpql.append(" AND r.area = :area");
+        }
+        if (tamanoMesa != null) {
+            jpql.append(" AND r.mesa.tamano = :tamanoMesa");
         }
 
-        return reserva; // Devuelve null si no se encuentra la reserva
+        TypedQuery<Reserva> query = em.createQuery(jpql.toString(), Reserva.class);
+        if (nombre != null && !nombre.isEmpty()) {
+            query.setParameter("nombre", "%" + nombre + "%");
+        }
+        if (telefono != null && !telefono.isEmpty()) {
+            query.setParameter("telefono", telefono);
+        }
+        if (fechaDesde != null) {
+            query.setParameter("fechaDesde", fechaDesde);
+        }
+        if (fechaHasta != null) {
+            query.setParameter("fechaHasta", fechaHasta);
+        }
+        if (area != null && !area.isEmpty()) {
+            query.setParameter("area", area);
+        }
+        if (tamanoMesa != null) {
+            query.setParameter("tamanoMesa", tamanoMesa);
+        }
+
+        return query.getResultList();
     }
 }

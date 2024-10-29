@@ -23,6 +23,7 @@ public class ReservaDTO {
     private Long idCliente;
     private String nombreCliente;
     private Long idMesa;
+    private String telefonoCliente;
 
     public ReservaDTO() {}
 
@@ -51,6 +52,22 @@ public class ReservaDTO {
         this.multa = multa;
         this.idCliente = idCliente;
         this.nombreCliente = nombreCliente;
+        this.idMesa = idMesa;
+    }
+    
+    public ReservaDTO(int idReserva, LocalDate fechaReserva, LocalTime horaReserva, int numPersonas, 
+                      double costo, String estadoReserva, double multa, Long idCliente, 
+                      String nombreCliente, String telefonoCliente, Long idMesa) {
+        this.idReserva = idReserva;
+        this.fechaReserva = fechaReserva;
+        this.horaReserva = horaReserva;
+        this.numPersonas = numPersonas;
+        this.costo = costo;
+        this.estadoReserva = estadoReserva;
+        this.multa = multa;
+        this.idCliente = idCliente;
+        this.nombreCliente = nombreCliente;
+        this.telefonoCliente = telefonoCliente;
         this.idMesa = idMesa;
     }
 
@@ -117,6 +134,14 @@ public class ReservaDTO {
 
     public void setIdCliente(Long idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public String getTelefonoCliente() {
+        return telefonoCliente;
+    }
+
+    public void setTelefonoCliente(String telefonoCliente) {
+        this.telefonoCliente = telefonoCliente;
     }
 
     public Long getIdMesa() {
