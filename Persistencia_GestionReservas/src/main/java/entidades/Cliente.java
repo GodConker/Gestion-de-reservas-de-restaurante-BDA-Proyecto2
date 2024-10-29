@@ -6,24 +6,25 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
+@Table(name = "Cliente") // Asegúrate de que esto coincida con el nombre de tu tabla
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_cliente") // Cambiado para coincidir con el nombre de la columna en MySQL
     private Long id;
-    
+
+    @Column(name = "nombre_completo") // Cambiado para coincidir con el nombre de la columna en MySQL
     private String nombreCompleto;
+
+    @Column(name = "telefono") // Cambiado para coincidir con el nombre de la columna en MySQL
     private String telefono;
 
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.PERSIST, orphanRemoval = true)
-    private List<Reserva> reservas = new ArrayList<>();
-
+    // Getters y Setters
     public Long getId() {
         return id;
     }
@@ -31,15 +32,12 @@ public class Cliente implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public String getNombreCompleto() {
         return nombreCompleto;
     }
 
     public void setNombreCompleto(String nombreCompleto) {
-        if (nombreCompleto == null || nombreCompleto.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre completo no puede estar vacío.");
-        }
         this.nombreCompleto = nombreCompleto;
     }
 
@@ -48,34 +46,7 @@ public class Cliente implements Serializable {
     }
 
     public void setTelefono(String telefono) {
-        if (telefono == null || telefono.trim().isEmpty()) {
-            throw new IllegalArgumentException("El teléfono no puede estar vacío.");
-        }
         this.telefono = telefono;
-    }
-
-    public List<Reserva> getReservas() {
-        return reservas;
-    }
-
-    public void setReservas(List<Reserva> reservas) {
-        if (reservas == null) {
-            throw new IllegalArgumentException("La lista de reservas no puede ser nula.");
-        }
-        this.reservas = reservas;
-    }
-
-    public void agregarReserva(Reserva reserva) {
-        if (reserva != null) {
-            reservas.add(reserva);
-            reserva.setCliente(this); // Asegura que la reserva conozca al cliente
-        }
-    }
-
-    public void eliminarReserva(Reserva reserva) {
-        if (reservas.remove(reserva)) {
-            reserva.setCliente(null); // Desvincula la reserva del cliente
-        }
     }
 
     @Override

@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package entidades;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +21,33 @@ public class Reserva implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "mesa_id", nullable = false) // Hacer la columna no nula
+    @JoinColumn(name = "id_mesa", nullable = false) // Hacer la columna no nula
     private Mesa mesa;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false) // Hacer la columna no nula
+    @JoinColumn(name = "id_cliente", nullable = false) // Cambia esto a id_cliente
     private Cliente cliente;
 
-    private LocalDateTime fechaHora; // Fecha y hora de la reserva
-    private int numeroPersonas; // Número de personas para la reserva
-    private double costo; // Costo de la reserva
+    @Column(name = "fecha_reserva")
+    private LocalDateTime fechaReserva;
+    
+    @Column(name = "hora_reserva", nullable = false)
+    private LocalTime horaReserva;
+    
+    
+    @Column(name = "num_personas") // Cambia esto para que coincida con la base de datos
+    private int numPersonas;
+    private double costo;
+
+    public enum EstadoReserva {
+        ACTIVA,
+        CANCELADA
+    }
+    @Enumerated(EnumType.STRING) // Indica que se usará el nombre del enumerado
+    @Column(name = "estado_reserva") // Asegúrate de que coincide con la columna de la base de datos
+    private EstadoReserva estadoReserva;
+    
+    private double multa;
 
     @OneToMany(mappedBy = "reserva", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<HistorialReserva> historialReservas = new ArrayList<>();
@@ -65,26 +82,44 @@ public class Reserva implements Serializable {
         this.cliente = cliente;
     }
 
-    public LocalDateTime getFechaHora() {
-        return fechaHora;
+    public LocalDateTime getFechaReserva() {
+        return fechaReserva;
     }
 
-    public void setFechaHora(LocalDateTime fechaHora) {
-        if (fechaHora == null) {
-            throw new IllegalArgumentException("La fecha y hora de la reserva no pueden ser nulas.");
-        }
-        this.fechaHora = fechaHora;
+    public void setFechaReserva(LocalDateTime fechaReserva) {
+        this.fechaReserva = fechaReserva;
     }
 
-    public int getNumeroPersonas() {
-        return numeroPersonas;
+    public int getNumPersonas() {
+        return numPersonas;
     }
 
-    public void setNumeroPersonas(int numeroPersonas) {
-        if (numeroPersonas <= 0) {
-            throw new IllegalArgumentException("El número de personas debe ser mayor que cero.");
-        }
-        this.numeroPersonas = numeroPersonas;
+    public void setNumPersonas(int numPersonas) {
+        this.numPersonas = numPersonas;
+    }
+
+    public EstadoReserva getEstadoReserva() {
+        return estadoReserva;
+    }
+
+    public void setEstadoReserva(EstadoReserva estadoReserva) {
+        this.estadoReserva = estadoReserva;
+    }
+
+    public double getMulta() {
+        return multa;
+    }
+
+    public void setMulta(double multa) {
+        this.multa = multa;
+    }
+
+    public List<HistorialReserva> getHistorialReservas() {
+        return historialReservas;
+    }
+
+    public void setHistorialReservas(List<HistorialReserva> historialReservas) {
+        this.historialReservas = historialReservas;
     }
 
     public double getCosto() {
@@ -97,6 +132,14 @@ public class Reserva implements Serializable {
         }
         this.costo = costo;
     }
+
+    public LocalTime getHoraReserva() {
+        return horaReserva;
+    }
+    
+    public void setHoraReserva(LocalTime horaReserva) {
+    this.horaReserva = horaReserva;
+}
 
     @Override
     public int hashCode() {
@@ -114,6 +157,7 @@ public class Reserva implements Serializable {
 
     @Override
     public String toString() {
-        return "Reserva{id=" + id + ", fechaHora=" + fechaHora + ", numeroPersonas=" + numeroPersonas + ", costo=" + costo + "}";
+        return "Reserva{" + "id=" + id + ", mesa=" + mesa + ", cliente=" + cliente + ", fechaReserva=" + fechaReserva + ", numPersonas=" + numPersonas + ", costo=" + costo + ", estadoReserva=" + estadoReserva + ", multa=" + multa + ", historialReservas=" + historialReservas + '}';
     }
+
 }

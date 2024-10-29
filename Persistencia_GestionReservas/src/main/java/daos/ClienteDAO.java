@@ -9,12 +9,22 @@ import javax.persistence.*;
 import java.util.List;
 
 public class ClienteDAO {
-
-    @PersistenceContext
+    private final EntityManagerFactory emf;
     private EntityManager em;
 
-    public ClienteDAO(EntityManager em) {
-        this.em = em;
+    public ClienteDAO() {
+        // Crear la fábrica de EntityManager
+        emf = Persistence.createEntityManagerFactory("Persistencia_GestionReservasPU");
+        em = emf.createEntityManager();
+    }
+
+    public void close() {
+        if (em != null && em.isOpen()) {
+            em.close(); // Cerrar el EntityManager
+        }
+        if (emf != null && emf.isOpen()) {
+            emf.close(); // Cerrar la fábrica si ya no se necesita
+        }
     }
 
     public void agregarCliente(Cliente cliente) {
@@ -61,6 +71,7 @@ public class ClienteDAO {
         }
 
         EntityTransaction transaction = em.getTransaction();
+        
         try {
             transaction.begin();
             em.merge(cliente);
@@ -79,6 +90,7 @@ public class ClienteDAO {
         }
 
         EntityTransaction transaction = em.getTransaction();
+        
         try {
             transaction.begin();
             Cliente cliente = consultarCliente(idCliente);
@@ -91,6 +103,20 @@ public class ClienteDAO {
                 transaction.rollback();
             }
             throw new RuntimeException("Error al eliminar el cliente: " + e.getMessage(), e);
+        }
+    }
+    
+    public Cliente buscarPorNombreYTelefono(String nombre, String telefono) {
+        String jpql = "SELECT c FROM Cliente c WHERE c.nombreCompleto = :nombre AND c.telefono = :telefono";
+        TypedQuery<Cliente> query = em.createQuery(jpql, Cliente.class);
+        query.setParameter("nombre", nombre);
+        query.setParameter("telefono", telefono);
+        
+        try {
+            List<Cliente> resultados = query.getResultList();
+            return resultados.isEmpty() ? null : resultados.get(0);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al buscar el cliente: " + e.getMessage());
         }
     }
 }

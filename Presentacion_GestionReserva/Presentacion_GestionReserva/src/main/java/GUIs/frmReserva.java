@@ -5,6 +5,10 @@
 package GUIs;
 
 import business.objects.ReservaBO;
+import entidades.Restaurante;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -18,9 +22,35 @@ public class frmReserva extends javax.swing.JFrame {
     public frmReserva() {
         initComponents();
         this.setLocationRelativeTo(null); // Centra el frame en la pantalla
+        cargarRestaurantes(); // Cargar los restaurantes al iniciar
 
     }
-    ReservaBO reservaBO = new ReservaBO();
+    private final ReservaBO reservaBO = new ReservaBO();
+
+    private final Map<Long, String> restaurantesMap = new HashMap<>(); // Mapa para almacenar el ID y el nombre
+
+    private void cargarRestaurantes() {
+        List<Restaurante> restaurantes = reservaBO.obtenerRestaurantes();
+
+        // Limpia el comboBox antes de llenarlo
+        cbRestaurantes.removeAllItems();
+
+        // Llena el comboBox y el mapa
+        for (Restaurante restaurante : restaurantes) {
+            cbRestaurantes.addItem(restaurante.getNombre()); // Agrega solo el nombre al comboBox
+            restaurantesMap.put(restaurante.getId(), restaurante.getNombre()); // Agrega el ID al mapa
+        }
+    }
+    
+    private Long obtenerIdRestauranteSeleccionado() {
+    String nombreSeleccionado = (String) cbRestaurantes.getSelectedItem(); // Obtiene el nombre seleccionado
+    for (Map.Entry<Long, String> entry : restaurantesMap.entrySet()) {
+        if (entry.getValue().equals(nombreSeleccionado)) {
+            return entry.getKey(); // Devuelve el ID correspondiente
+        }
+    }
+    return null; // O lanza una excepción si no se encuentra
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,6 +88,8 @@ public class frmReserva extends javax.swing.JFrame {
         TxtfNombreCompleto = new javax.swing.JTextField();
         BtnBuscarRegistrado = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        cbRestaurantes = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,10 +165,10 @@ public class frmReserva extends javax.swing.JFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 130, 20));
         jPanel1.add(DTPFechaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 310, -1));
 
+        jLabel6.setText("Número de Personas:");
         jLabel6.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Número de Personas:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, -1, -1));
 
         CBXNumPersonas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8" }));
         CBXNumPersonas.addActionListener(new java.awt.event.ActionListener() {
@@ -144,24 +176,24 @@ public class frmReserva extends javax.swing.JFrame {
                 CBXNumPersonasActionPerformed(evt);
             }
         });
-        jPanel1.add(CBXNumPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 370, 110, -1));
+        jPanel1.add(CBXNumPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 430, 110, -1));
 
+        jLabel7.setText("Tipo de Mesa:");
         jLabel7.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Tipo de Mesa:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 410, -1, 20));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 460, -1, 20));
 
         TxtfTipoMesa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtfTipoMesaActionPerformed(evt);
             }
         });
-        jPanel1.add(TxtfTipoMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, 110, -1));
+        jPanel1.add(TxtfTipoMesa, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, 110, -1));
 
+        jLabel8.setText("Ubicación:");
         jLabel8.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Ubicación:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 490, -1, -1));
 
         CBXUbicacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Ventana", "Terraza" }));
         CBXUbicacion.addActionListener(new java.awt.event.ActionListener() {
@@ -169,19 +201,19 @@ public class frmReserva extends javax.swing.JFrame {
                 CBXUbicacionActionPerformed(evt);
             }
         });
-        jPanel1.add(CBXUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 450, 110, -1));
+        jPanel1.add(CBXUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 490, 110, -1));
 
+        jLabel9.setText("Costo Total:");
         jLabel9.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Costo Total:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, 20));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 460, -1, 20));
 
         TxtfCostoTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TxtfCostoTotalActionPerformed(evt);
             }
         });
-        jPanel1.add(TxtfCostoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 100, -1));
+        jPanel1.add(TxtfCostoTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 490, 100, -1));
 
         BtnCancelar.setText("Cancelar");
         BtnCancelar.setBackground(new java.awt.Color(0, 0, 0));
@@ -192,7 +224,7 @@ public class frmReserva extends javax.swing.JFrame {
                 BtnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 500, 120, 30));
+        jPanel1.add(BtnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 530, 120, 30));
 
         BtnConfirmar.setText("Confirmar");
         BtnConfirmar.setBackground(new java.awt.Color(0, 0, 0));
@@ -203,7 +235,7 @@ public class frmReserva extends javax.swing.JFrame {
                 BtnConfirmarActionPerformed(evt);
             }
         });
-        jPanel1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 110, 30));
+        jPanel1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 530, 110, 30));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 480, 10));
 
         jLabel10.setText("Nombre Completo:");
@@ -229,10 +261,23 @@ public class frmReserva extends javax.swing.JFrame {
         });
         jPanel1.add(BtnBuscarRegistrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 90, 30));
 
-        jLabel11.setText("Buscar Cliente Registrado:");
+        jLabel11.setText("Restaurante:");
         jLabel11.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Champagne & Limousines", 1, 19)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Buscar Cliente Registrado:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, -1, -1));
+
+        cbRestaurantes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbRestaurantes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbRestaurantesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cbRestaurantes, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 140, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -337,74 +382,77 @@ public class frmReserva extends javax.swing.JFrame {
 
     private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
         // Verificar si los campos están llenos
-    if (TxtfNombreCompleto.getText().isEmpty()
-            || TxtfTelefono.getText().isEmpty()
-            || CBXNumPersonas.getSelectedItem().toString().equals("0")
-            || DTPFechaHora.getDateTimeStrict() == null) {
+        if (TxtfNombreCompleto.getText().isEmpty()
+                || TxtfTelefono.getText().isEmpty()
+                || CBXNumPersonas.getSelectedItem().toString().equals("0")
+                || DTPFechaHora.getDateTimeStrict() == null) {
 
-        // Mostrar mensaje si hay campos vacíos
-        javax.swing.JOptionPane.showMessageDialog(this,
-                "Por favor, llena todos los campos requeridos.",
-                "Advertencia",
-                javax.swing.JOptionPane.WARNING_MESSAGE);
-        return; // Salir del método
-    }
-
-    try {
-        // Obtener los datos del formulario
-        String nombre = TxtfNombreCompleto.getText();
-        String telefono = TxtfTelefono.getText();
-        int numPersonas = Integer.parseInt(CBXNumPersonas.getSelectedItem().toString());
-
-        // Definir tamaño de mesa y costo basado en número de personas
-        String tipoMesa;
-        int costoTotal;
-        if (numPersonas >= 1 && numPersonas <= 2) {
-            tipoMesa = "Pequeña";
-            costoTotal = 300;
-        } else if (numPersonas >= 3 && numPersonas <= 4) {
-            tipoMesa = "Mediana";
-            costoTotal = 500;
-        } else if (numPersonas >= 5 && numPersonas <= 8) {
-            tipoMesa = "Grande";
-            costoTotal = 700;
-        } else {
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                "Número de personas no válido para la reservación.",
-                "Error",
-                javax.swing.JOptionPane.ERROR_MESSAGE);
-            return; // Salir del método si el número de personas no es válido
+            // Mostrar mensaje si hay campos vacíos
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Por favor, llena todos los campos requeridos.",
+                    "Advertencia",
+                    javax.swing.JOptionPane.WARNING_MESSAGE);
+            return; // Salir del método
         }
 
-        // Crear el ticket de reserva
-        String ticket = "----- RESERVA ----\n"
-                + "Nombre Completo: " + nombre + "\n"
-                + "Teléfono: " + telefono + "\n"
-                + "Número de Personas: " + numPersonas + "\n"
-                + "Tipo de Mesa: " + tipoMesa + "\n"
-                + "Costo Total: $" + costoTotal + "\n"
-                + "Fecha y Hora: " + DTPFechaHora.getDateTimeStrict() + "\n"
-                + "--------------------\n"
-                + "¿Estás de acuerdo con la reservación?";
+        try {
+            // Obtener los datos del formulario
+            String nombre = TxtfNombreCompleto.getText();
+            String telefono = TxtfTelefono.getText();
+            int numPersonas = Integer.parseInt(CBXNumPersonas.getSelectedItem().toString());
 
-        // Mostrar cuadro de diálogo con el ticket
-        int respuesta = javax.swing.JOptionPane.showConfirmDialog(this, ticket, "Confirmar Reservación", javax.swing.JOptionPane.YES_NO_OPTION);
+            // Definir tamaño de mesa y costo basado en número de personas
+            String tipoMesa;
+            double costoTotal;
+            if (numPersonas >= 1 && numPersonas <= 2) {
+                tipoMesa = "Pequeña";
+                costoTotal = 300.0;
+            } else if (numPersonas >= 3 && numPersonas <= 4) {
+                tipoMesa = "Mediana";
+                costoTotal = 500.0;
+            } else if (numPersonas >= 5 && numPersonas <= 8) {
+                tipoMesa = "Grande";
+                costoTotal = 700.0;
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this,
+                        "Número de personas no válido para la reservación.",
+                        "Error",
+                        javax.swing.JOptionPane.ERROR_MESSAGE);
+                return; // Salir del método si el número de personas no es válido
+            }
 
-        if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
-            // Confirmar la reserva a través de la capa de negocio
-            reservaBO.confirmarReserva(nombre, telefono, tipoMesa, costoTotal, numPersonas);
+            // Supongamos que tienes un método para obtener el ID del restaurante
+            Long idRestaurante = obtenerIdRestauranteSeleccionado(); 
 
-            javax.swing.JOptionPane.showMessageDialog(this, "Reservación confirmada con éxito");
+            // Crear el ticket de reserva
+            String ticket = "----- RESERVA ----\n"
+                    + "Nombre Completo: " + nombre + "\n"
+                    + "Teléfono: " + telefono + "\n"
+                    + "Número de Personas: " + numPersonas + "\n"
+                    + "Tipo de Mesa: " + tipoMesa + "\n"
+                    + "Costo Total: $" + costoTotal + "\n"
+                    + "Fecha y Hora: " + DTPFechaHora.getDateTimeStrict() + "\n"
+                    + "--------------------\n"
+                    + "¿Estás de acuerdo con la reservación?";
 
-            // Regresar al menú
-            frmMenu menuFrame = new frmMenu();
-            menuFrame.setVisible(true);
-            this.dispose();
+            // Mostrar cuadro de diálogo con el ticket
+            int respuesta = javax.swing.JOptionPane.showConfirmDialog(this, ticket, "Confirmar Reservación", javax.swing.JOptionPane.YES_NO_OPTION);
+
+            if (respuesta == javax.swing.JOptionPane.YES_OPTION) {
+                // Confirmar la reserva a través de la capa de negocio
+                reservaBO.confirmarReserva(nombre, telefono, tipoMesa, costoTotal, numPersonas, idRestaurante);
+
+                javax.swing.JOptionPane.showMessageDialog(this, "Reservación confirmada con éxito");
+
+                // Regresar al menú
+                frmMenu menuFrame = new frmMenu();
+                menuFrame.setVisible(true);
+                this.dispose();
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al confirmar la reservación: " + e.getMessage(),
+                    "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Error al confirmar la reservación: " + e.getMessage(),
-                                                  "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_BtnConfirmarActionPerformed
 
     private void BtnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegresarActionPerformed
@@ -428,6 +476,10 @@ public class frmReserva extends javax.swing.JFrame {
     private void TxtfTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtfTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TxtfTelefonoActionPerformed
+
+    private void cbRestaurantesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbRestaurantesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbRestaurantesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -477,10 +529,12 @@ public class frmReserva extends javax.swing.JFrame {
     private javax.swing.JTextField TxtfNombreCompleto;
     private javax.swing.JTextField TxtfTelefono;
     private javax.swing.JTextField TxtfTipoMesa;
+    private javax.swing.JComboBox<String> cbRestaurantes;
     private com.toedter.calendar.JCalendar jCalendar1;
     private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

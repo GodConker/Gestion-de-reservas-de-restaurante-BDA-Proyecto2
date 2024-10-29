@@ -13,22 +13,22 @@ import entidades.Mesa;
  */
 public class MesaConvertidor {
     // De Entidad a DTO
-    public static MesaDTO aDTO(Mesa mesa) {
-        MesaDTO mesaDTO = new MesaDTO();
-        mesaDTO.setIdMesa((int)(long)mesa.getId());
-        mesaDTO.setTipoMesa(mesa.getTipo());
-        mesaDTO.setUbicacion(mesa.getUbicacion());
-        // Agrega más atributos según sea necesario
-        return mesaDTO;
-    }
-
-    // De DTO a Entidad
-    public static Mesa aEntidad(MesaDTO mesaDTO) {
-        Mesa mesa = new Mesa();
-        mesa.setId((long)mesaDTO.getIdMesa());
-        mesa.setTipo(mesaDTO.getTipoMesa());
-        mesa.setUbicacion(mesaDTO.getUbicacion());
-        // Agrega más atributos según sea necesario
-        return mesa;
-    }
+//    public static MesaDTO aDTO(Mesa mesa) {
+//        MesaDTO mesaDTO = new MesaDTO();
+//        mesaDTO.setIdMesa((int)(long)mesa.getId());
+//        mesaDTO.setTipoMesa(mesa.getTipo());
+//        mesaDTO.setUbicacion(mesa.getUbicacion());
+//        // Agrega más atributos según sea necesario
+//        return mesaDTO;
+//    }
+//
+//    // De DTO a Entidad
+//    public static Mesa aEntidad(MesaDTO mesaDTO) {
+//        Mesa mesa = new Mesa();
+//        mesa.setId((long)mesaDTO.getIdMesa());
+//        mesa.setTipo(mesaDTO.getTipoMesa());
+//        mesa.setUbicacion(mesaDTO.getUbicacion());
+//        // Agrega más atributos según sea necesario
+//        return mesa;
+//    }
 }

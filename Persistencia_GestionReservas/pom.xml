@@ -7,6 +7,11 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version> <!-- Usa la versión más reciente disponible -->
+        </dependency>
+        <dependency>
             <groupId>com.mycompany</groupId>
             <artifactId>Negocio_GestionReservas</artifactId>
             <version>1.0-SNAPSHOT</version>
@@ -49,8 +54,8 @@
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <exec.mainClass>com.mycompany.persistencia_gestionreservas.Persistencia_GestionReservas</exec.mainClass>
     </properties>
     

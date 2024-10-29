@@ -21,6 +21,9 @@ public class HistorialReserva implements Serializable {
     @JoinColumn(name = "id_reserva", nullable = false) // Hacer la columna no nula
     private Reserva reserva;
 
+    public HistorialReserva() {
+    }
+
     public HistorialReserva(Long id, Reserva reserva) {
         this.id = id;
         this.reserva = reserva;

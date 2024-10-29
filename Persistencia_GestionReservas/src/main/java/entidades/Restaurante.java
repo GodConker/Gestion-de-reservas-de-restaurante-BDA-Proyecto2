@@ -6,21 +6,32 @@ package entidades;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "Restaurante") // Asegúrate de que esto coincide con el nombre de tu tabla
 public class Restaurante implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Cambiado a IDENTITY para mejor gestión de IDs
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // IDENTITY para la gestión de IDs
+    @Column(name = "id_restaurante") // Mapeo correcto del nombre de la columna
     private Long id;
 
+    @Column(name = "nombre", nullable = false) // Mapeo y restricciones para nombre
     private String nombre; // Nombre del restaurante
+
+    @Column(name = "direccion", nullable = false) // Mapeo y restricciones para dirección
     private String direccion; // Dirección del restaurante
-    private String telefono; // Teléfono de contacto
+
+    @Column(name = "horario_apertura", nullable = false) // Mapeo para horario de apertura
+    private Time horarioApertura; // Tipo de dato Time para la hora de apertura
+
+    @Column(name = "horario_cierre", nullable = false) // Mapeo para horario de cierre
+    private Time horarioCierre; // Tipo de dato Time para la hora de cierre
 
     @OneToMany(mappedBy = "restaurante", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Mesa> mesas = new ArrayList<>();
@@ -55,16 +66,34 @@ public class Restaurante implements Serializable {
         this.direccion = direccion;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public Time getHorarioApertura() {
+        return horarioApertura;
     }
 
-    public void setTelefono(String telefono) {
-        if (telefono == null || telefono.trim().isEmpty()) {
-            throw new IllegalArgumentException("El teléfono del restaurante no puede ser nulo o vacío.");
-        }
-        this.telefono = telefono;
+    public void setHorarioApertura(Time horarioApertura) {
+        this.horarioApertura = horarioApertura;
     }
+
+    public Time getHorarioCierre() {
+        return horarioCierre;
+    }
+
+    public void setHorarioCierre(Time horarioCierre) {
+        this.horarioCierre = horarioCierre;
+    }
+    
+    
+
+//    public String getTelefono() {
+//        return telefono;
+//    }
+//
+//    public void setTelefono(String telefono) {
+//        if (telefono == null || telefono.trim().isEmpty()) {
+//            throw new IllegalArgumentException("El teléfono del restaurante no puede ser nulo o vacío.");
+//        }
+//        this.telefono = telefono;
+//    }
 
     public List<Mesa> getMesas() {
         return mesas;
@@ -90,6 +119,7 @@ public class Restaurante implements Serializable {
 
     @Override
     public String toString() {
-        return "Restaurante{id=" + id + ", nombre='" + nombre + "', direccion='" + direccion + "', telefono='" + telefono + "'}";
+        return "Restaurante{" + "id=" + id + ", nombre=" + nombre + ", direccion=" + direccion + ", horarioApertura=" + horarioApertura + ", horarioCierre=" + horarioCierre + ", mesas=" + mesas + '}';
     }
+    
 }

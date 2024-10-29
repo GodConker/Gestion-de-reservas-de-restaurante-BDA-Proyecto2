@@ -5,28 +5,42 @@
 package daos;
 
 import entidades.Reserva;
+import entidades.Restaurante;
 import javax.persistence.*;
 import java.util.List;
 
 public class ReservaDAO {
 
-    @PersistenceContext
     private EntityManager em;
+    private final EntityManagerFactory emf;
 
-    public ReservaDAO(EntityManager em) {
+    public ReservaDAO() {
+        emf = Persistence.createEntityManagerFactory("Persistencia_GestionReservasPU");
+    }
+
+    public void setEntityManager(EntityManager em) {
         this.em = em;
     }
 
-    public void agregarReserva(Reserva reserva) {
+    public void crearReserva(Reserva reserva) throws Exception {
+        EntityManager em = null; // Inicializar EntityManager a null
+
         try {
+            em = emf.createEntityManager(); // Obtener una instancia de EntityManager
             em.getTransaction().begin();
-            em.persist(reserva);
+            em.persist(reserva); // Guardar la reserva
             em.getTransaction().commit();
         } catch (Exception e) {
-            em.getTransaction().rollback();
-            throw new RuntimeException("Error al agregar la reserva: " + e.getMessage());
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback(); // Revertir si hay un error
+            }
+            throw new Exception("Error al agregar la reserva: " + e.getMessage(), e);
+        } finally {
+            if (em != null && em.isOpen()) {
+                em.close(); // Cerrar el EntityManager si está abierto
+            }
         }
-    }
+    }   
 
     public Reserva consultarReserva(Long idReserva) {
         try {
@@ -67,5 +81,19 @@ public class ReservaDAO {
             em.getTransaction().rollback();
             throw new RuntimeException("Error al eliminar la reserva: " + e.getMessage());
         }
+    }
+    
+    public List<Restaurante> obtenerRestaurantes() {
+        EntityManager emm = emf.createEntityManager();
+        List<Restaurante> restaurantes = null;
+
+        try {
+            TypedQuery<Restaurante> query = emm.createQuery("SELECT r FROM Restaurante r", Restaurante.class);
+            restaurantes = query.getResultList();
+        } finally {
+            emm.close();
+        }
+
+        return restaurantes;
     }
 }

@@ -5,7 +5,6 @@
 package business.objects;
 
 import daos.ClienteDAO;
-import dtos.ClienteDTO;
 import entidades.Cliente;
 import java.util.List;
 
@@ -61,17 +60,5 @@ public class ClienteBO {
             throw new RuntimeException("Cliente no encontrado");
         }
         clienteDAO.eliminarCliente(idCliente);
-    }
-
-    public ClienteDTO buscarClientePorNombre(String nombre) throws Exception {
-        ClienteDTO clienteDTO = clienteDAO.obtenerPorNombre(nombre);
-        if (clienteDTO == null) {
-            throw new Exception("Cliente no encontrado.");
-        }
-        return clienteDTO;
-    }
-
-    public ClienteDTO buscarClientePorNombreYTelefono(String nombre, String telefono) {
-        return clienteDAO.buscarClientePorNombreYTelefono(nombre, telefono);
     }
 }
