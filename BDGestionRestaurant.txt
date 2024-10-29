@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Restaurante (
 
 CREATE TABLE IF NOT EXISTS Mesa (
     id_mesa INT AUTO_INCREMENT PRIMARY KEY,
-    codigo_mesa VARCHAR(20) NOT NULL,
+    codigo_mesa VARCHAR(100) NOT NULL,
     tipo_mesa ENUM('Pequeña', 'Mediana', 'Grande') NOT NULL,
     capacidad INT NOT NULL,
     ubicacion ENUM('Terraza', 'Ventana', 'General') NOT NULL,
@@ -47,7 +47,33 @@ CREATE TABLE IF NOT EXISTS HistorialReserva (
     CONSTRAINT fk_historial_reserva FOREIGN KEY (id_reserva) REFERENCES Reserva(id_reserva)
 );
 
+SELECT * FROM Cliente WHERE nombre_completo = 'Danny' AND telefono = '6441972803';
 
+INSERT INTO Restaurante (nombre, direccion, horario_apertura, horario_cierre) VALUES
+('La Casa de la Pasta', 'Calle de la Pasta 123, Ciudad', '11:00:00', '22:00:00'),
+('El Rincón Mexicano', 'Avenida de los Mexicanos 456, Ciudad', '10:00:00', '23:00:00'),
+('Sushi Paradise', 'Boulevard de Sushi 789, Ciudad', '12:00:00', '21:00:00'),
+('Pizzeria Bella Italia', 'Plaza de Italia 101, Ciudad', '11:30:00', '22:30:00'),
+('Café Aromas', 'Calle del Café 202, Ciudad', '08:00:00', '20:00:00');
+
+/*
+-- Desactivar las restricciones de claves foráneas
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- Truncar todas las tablas
+TRUNCATE TABLE HistorialReserva;
+TRUNCATE TABLE Reserva;
+TRUNCATE TABLE Mesa;
+TRUNCATE TABLE Cliente;
+TRUNCATE TABLE Restaurante;
+
+-- Volver a activar las restricciones de claves foráneas
+SET FOREIGN_KEY_CHECKS = 1;
+
+SELECT * FROM CLIENTE;
+SELECT * FROM RESERVA;
+SELECT * FROM MESA;
+*/
 CREATE INDEX idx_reserva_fecha ON Reserva(fecha_reserva);
 CREATE INDEX idx_reserva_cliente ON Reserva(id_cliente);
 CREATE INDEX idx_mesa_restaurante ON Mesa(id_restaurante);
