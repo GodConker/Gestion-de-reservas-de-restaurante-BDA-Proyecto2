@@ -11,7 +11,7 @@ import java.util.List;
 public class RestauranteDAO {
 
     @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em;
 
     public RestauranteDAO(EntityManager em) {
         this.em = em;

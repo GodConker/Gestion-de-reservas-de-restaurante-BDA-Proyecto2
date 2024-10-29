@@ -6,6 +6,7 @@ package business.objects;
 
 import daos.ClienteDAO;
 import entidades.Cliente;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,9 +15,10 @@ import java.util.List;
  */
 public class ClienteBO {
 
-    private ClienteDAO clienteDAO;
+    private final ClienteDAO clienteDAO;
 
     public ClienteBO() {
+        clienteDAO = new ClienteDAO();
     }
 
     public ClienteBO(ClienteDAO clienteDAO) {
@@ -60,5 +62,47 @@ public class ClienteBO {
             throw new RuntimeException("Cliente no encontrado");
         }
         clienteDAO.eliminarCliente(idCliente);
+    }
+
+    public Cliente buscarClientePorNombreOTelefono(String criterio) {
+    if (criterio == null || criterio.trim().isEmpty()) {
+        throw new IllegalArgumentException("El criterio de búsqueda no puede estar vacío.");
+    }
+
+    try {
+        List<Cliente> clientes = clienteDAO.buscarPorNombreOTelefono(criterio);
+        return clientes.isEmpty() ? null : clientes.get(0); // Devuelve el primer cliente encontrado
+    } catch (Exception e) {
+        throw new RuntimeException("Error al buscar cliente en la capa de negocio: " + e.getMessage(), e);
+    }
+}
+
+    // Cerrar conexión al finalizar
+    public void close() {
+        clienteDAO.close();
+    }
+    
+    public void insercionMasivaClientes() throws Exception {
+        List<Cliente> clientes = new ArrayList<>();
+
+        // Nombres y teléfonos de ejemplo para insertar
+        String[] nombres = {
+            "Juan Pérez", "María López", "Carlos García", "Ana Martínez",
+            "Luis Hernández", "Laura Rodríguez", "Jorge Torres", "Marta Sánchez",
+            "Pedro Ramírez", "Isabel Cruz", "Diego Morales", "Sofía Gómez",
+            "Andrés Ruiz", "Patricia Díaz", "Francisco Romero", "Carmen Herrera",
+            "Ricardo Vargas", "Verónica Jiménez", "Alejandro Castro", "Gabriela Mendoza"
+        };
+
+        // Generar 20 clientes de ejemplo
+        for (int i = 0; i < nombres.length; i++) {
+            Cliente cliente = new Cliente();
+            cliente.setNombreCompleto(nombres[i]);
+            cliente.setTelefono("555-010" + (i < 10 ? "0" + (i + 1) : (i + 1))); // Telefono en formato "555-01001", "555-01002", etc.
+            clientes.add(cliente);
+        }
+
+        // Llamar al método del DAO para la inserción masiva
+        clienteDAO.insercionMasivaClientes(clientes);
     }
 }

@@ -23,24 +23,24 @@ public class ReservaDAO {
     }
 
     public void crearReserva(Reserva reserva) throws Exception {
-        EntityManager em = null; // Inicializar EntityManager a null
+        EntityManager emm = null; // Inicializar EntityManager a null
 
         try {
-            em = emf.createEntityManager(); // Obtener una instancia de EntityManager
-            em.getTransaction().begin();
-            em.persist(reserva); // Guardar la reserva
-            em.getTransaction().commit();
+            emm = emf.createEntityManager(); // Obtener una instancia de EntityManager
+            emm.getTransaction().begin();
+            emm.persist(reserva); // Guardar la reserva
+            emm.getTransaction().commit();
         } catch (Exception e) {
-            if (em != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback(); // Revertir si hay un error
+            if (emm != null && emm.getTransaction().isActive()) {
+                emm.getTransaction().rollback(); // Revertir si hay un error
             }
             throw new Exception("Error al agregar la reserva: " + e.getMessage(), e);
         } finally {
-            if (em != null && em.isOpen()) {
-                em.close(); // Cerrar el EntityManager si está abierto
+            if (emm != null && emm.isOpen()) {
+                emm.close(); // Cerrar el EntityManager si está abierto
             }
         }
-    }   
+    }
 
     public Reserva consultarReserva(Long idReserva) {
         try {
@@ -82,7 +82,7 @@ public class ReservaDAO {
             throw new RuntimeException("Error al eliminar la reserva: " + e.getMessage());
         }
     }
-    
+
     public List<Restaurante> obtenerRestaurantes() {
         EntityManager emm = emf.createEntityManager();
         List<Restaurante> restaurantes = null;
@@ -95,5 +95,67 @@ public class ReservaDAO {
         }
 
         return restaurantes;
+    }
+
+    // Método para obtener una reserva por su ID
+    public Reserva obtenerReservaPorId(Long idReserva) {
+        try {
+            return em.find(Reserva.class, idReserva);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener la reserva por ID: " + e.getMessage());
+        }
+    }
+
+    // Método para cancelar la reserva
+    public void cancelarReserva(Long idReserva) {
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            // Obtener la reserva
+            Reserva reserva = obtenerReservaPorId(idReserva);
+            if (reserva != null) {
+                // Cambiar el estado a CANCELADA
+                reserva.setEstadoReserva(Reserva.EstadoReserva.Cancelada);
+                em.merge(reserva); // Guardar los cambios
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback(); // Deshacer cambios en caso de error
+            }
+            throw new RuntimeException("Error al cancelar la reserva: " + e.getMessage());
+        }
+    }
+
+    public Reserva buscarReservaPorId(int idReserva) {
+        EntityManager emm = null; // Inicializar EntityManager a null
+        Reserva reserva = null;
+
+        try {
+            emm = emf.createEntityManager(); // Obtener una instancia de EntityManager
+            emm.getTransaction().begin(); // Iniciar transacción
+
+            // Utilizar JPQL para buscar la reserva por su ID
+            TypedQuery<Reserva> query = emm.createQuery(
+                    "SELECT r FROM Reserva r WHERE r.idReserva = :id", Reserva.class);
+            query.setParameter("id", idReserva);
+            reserva = query.getSingleResult(); // Obtener el resultado
+
+            emm.getTransaction().commit(); // Confirmar la transacción
+        } catch (NoResultException e) {
+            System.out.println("Reserva no encontrada con ID: " + idReserva);
+            // Aquí puedes manejar lo que deseas hacer si no se encuentra la reserva
+        } catch (Exception e) {
+            if (emm != null && emm.getTransaction().isActive()) {
+                emm.getTransaction().rollback(); // Revertir si hay un error
+            }
+            throw new RuntimeException("Error al buscar la reserva: " + e.getMessage(), e);
+        } finally {
+            if (emm != null && emm.isOpen()) {
+                emm.close(); // Cerrar el EntityManager si está abierto
+            }
+        }
+
+        return reserva; // Devuelve null si no se encuentra la reserva
     }
 }

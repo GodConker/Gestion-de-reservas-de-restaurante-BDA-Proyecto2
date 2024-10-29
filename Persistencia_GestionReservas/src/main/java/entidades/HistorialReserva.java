@@ -5,6 +5,7 @@
 package entidades;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 @Entity
@@ -13,20 +14,33 @@ public class HistorialReserva implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Cambio de AUTO a IDENTITY para generación de ID
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Relación muchos a uno con Reserva.
     @ManyToOne
-    @JoinColumn(name = "id_reserva", nullable = false) // Hacer la columna no nula
+    @JoinColumn(name = "id_reserva", nullable = false)
     private Reserva reserva;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING) // Usar STRING para almacenar el enum como texto
+    private EstadoReserva estado; // Asegúrate de tener esta clase de enum
+
+    public enum EstadoReserva {
+        RESERVADA,
+        CANCELADA
+    }
+
+    @Column(nullable = false)
+    private Date fechaCambioEstado; // Cambiamos el tipo a Date
 
     public HistorialReserva() {
     }
 
-    public HistorialReserva(Long id, Reserva reserva) {
+    public HistorialReserva(Long id, Reserva reserva, EstadoReserva estado, Date fechaCambioEstado) {
         this.id = id;
         this.reserva = reserva;
+        this.estado = estado;
+        this.fechaCambioEstado = fechaCambioEstado;
     }
 
     public Long getId() {
@@ -48,6 +62,22 @@ public class HistorialReserva implements Serializable {
         this.reserva = reserva;
     }
 
+    public EstadoReserva getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoReserva estado) {
+        this.estado = estado;
+    }
+
+    public Date getFechaCambioEstado() {
+        return fechaCambioEstado;
+    }
+
+    public void setFechaCambioEstado(Date fechaCambioEstado) {
+        this.fechaCambioEstado = fechaCambioEstado;
+    }
+
     @Override
     public int hashCode() {
         return (id != null) ? id.hashCode() : 0;
@@ -64,6 +94,7 @@ public class HistorialReserva implements Serializable {
 
     @Override
     public String toString() {
-        return "HistorialReserva{id=" + id + ", reserva=" + (reserva != null ? reserva.getId() : "null") + "}";
+        return "HistorialReserva{id=" + id + ", reserva=" + (reserva != null ? reserva.getIdReserva(): "null")
+                + ", estado=" + estado + ", fechaCambioEstado=" + fechaCambioEstado + "}";
     }
 }

@@ -4,27 +4,30 @@
  */
 package dtos;
 
-import java.util.Date;
 
 /**
  *
  * @author danie
  */
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class ReservaDTO {
     private int idReserva;
-    private Date fechaReserva;
-    private Date horaReserva;
+    private LocalDate fechaReserva;
+    private LocalTime horaReserva;
     private int numPersonas;
     private double costo;
     private String estadoReserva;
     private double multa;
-    private int idCliente;
-    private int idMesa;
+    private Long idCliente;
+    private String nombreCliente;
+    private Long idMesa;
 
     public ReservaDTO() {}
 
-    public ReservaDTO(int idReserva, Date fechaReserva, Date horaReserva, int numPersonas, double costo, 
-                      String estadoReserva, double multa, int idCliente, int idMesa) {
+    public ReservaDTO(int idReserva, LocalDate fechaReserva, LocalTime horaReserva, int numPersonas, 
+                      double costo, String estadoReserva, double multa, Long idCliente, Long idMesa) {
         this.idReserva = idReserva;
         this.fechaReserva = fechaReserva;
         this.horaReserva = horaReserva;
@@ -33,6 +36,21 @@ public class ReservaDTO {
         this.estadoReserva = estadoReserva;
         this.multa = multa;
         this.idCliente = idCliente;
+        this.idMesa = idMesa;
+    }
+    
+    public ReservaDTO(int idReserva, LocalDate fechaReserva, LocalTime horaReserva, int numPersonas, 
+                      double costo, String estadoReserva, double multa, Long idCliente, 
+                      String nombreCliente, Long idMesa) {
+        this.idReserva = idReserva;
+        this.fechaReserva = fechaReserva;
+        this.horaReserva = horaReserva;
+        this.numPersonas = numPersonas;
+        this.costo = costo;
+        this.estadoReserva = estadoReserva;
+        this.multa = multa;
+        this.idCliente = idCliente;
+        this.nombreCliente = nombreCliente;
         this.idMesa = idMesa;
     }
 
@@ -45,19 +63,19 @@ public class ReservaDTO {
         this.idReserva = idReserva;
     }
 
-    public Date getFechaReserva() {
+    public LocalDate getFechaReserva() {
         return fechaReserva;
     }
 
-    public void setFechaReserva(Date fechaReserva) {
+    public void setFechaReserva(LocalDate fechaReserva) {
         this.fechaReserva = fechaReserva;
     }
 
-    public Date getHoraReserva() {
+    public LocalTime getHoraReserva() {
         return horaReserva;
     }
 
-    public void setHoraReserva(Date horaReserva) {
+    public void setHoraReserva(LocalTime horaReserva) {
         this.horaReserva = horaReserva;
     }
 
@@ -93,20 +111,28 @@ public class ReservaDTO {
         this.multa = multa;
     }
 
-    public int getIdCliente() {
+    public Long getIdCliente() {
         return idCliente;
     }
 
-    public void setIdCliente(int idCliente) {
+    public void setIdCliente(Long idCliente) {
         this.idCliente = idCliente;
     }
 
-    public int getIdMesa() {
+    public Long getIdMesa() {
         return idMesa;
     }
 
-    public void setIdMesa(int idMesa) {
+    public void setIdMesa(Long idMesa) {
         this.idMesa = idMesa;
+    }
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
     }
     
     @Override

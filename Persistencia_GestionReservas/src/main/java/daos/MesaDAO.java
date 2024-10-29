@@ -8,24 +8,54 @@ import entidades.Mesa;
 import entidades.Restaurante;
 import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
 
 public class MesaDAO {
 
-    private EntityManagerFactory emf;
+    private final EntityManagerFactory emf;
 
     public MesaDAO() {
         emf = Persistence.createEntityManagerFactory("Persistencia_GestionReservasPU");
     }
 
-    public String generarCodigoMesa() {
-        // Generar un código único utilizando UUID o cualquier otra lógica
-        return "MESA-" + UUID.randomUUID().toString(); // Ajusta según tus necesidades
+    public String generarCodigoMesa(String ubicacion, int capacidad) {
+        // Obtener las tres primeras letras de la ubicación
+        String ubicacionCodigo;
+        switch (ubicacion.toUpperCase()) { // Convierte a mayúsculas para hacer la comparación insensible a mayúsculas
+            case "TERRAZA" ->
+                ubicacionCodigo = "TER";
+            case "VENTANA" ->
+                ubicacionCodigo = "VEN";
+            case "GENERAL" ->
+                ubicacionCodigo = "GEN";
+            default ->
+                throw new IllegalArgumentException("Ubicación no válida: " + ubicacion);
+        }
+        // Convierte a mayúsculas para hacer la comparación insensible a mayúsculas
+
+        // Generar un número único de tres dígitos
+        String numeroUnico = String.format("%03d", obtenerNumeroUnico()); // Asegúrate de implementar este método
+
+        // Construir el código de la mesa
+        return ubicacionCodigo + "-" + capacidad + "-" + numeroUnico;
+    }
+
+    private int obtenerNumeroUnico() {
+        // Lógica para generar un número único (por ejemplo, contar mesas existentes y sumar uno)
+        // Aquí se puede implementar la lógica para asegurarte de que sea único
+        // Por simplicidad, usaré un número aleatorio entre 1 y 999
+        return (int) (Math.random() * 999) + 1; // Cambia esto por una lógica más robusta
     }
 
     public void agregarMesa(Mesa mesa) {
+        // Validar que la mesa no sea nula
+        if (mesa == null) {
+            throw new IllegalArgumentException("La mesa no puede ser nula.");
+        }
+
         // Generar el código de mesa antes de agregar
-        mesa.setCodigoMesa(generarCodigoMesa());
+        // Asegúrate de que la ubicación sea un enum y usa su nombre
+        String codigoMesa = generarCodigoMesa(mesa.getUbicacion().name(), mesa.getCapacidad());
+        mesa.setCodigoMesa(codigoMesa);
 
         EntityManager em = emf.createEntityManager();
         EntityTransaction transaction = em.getTransaction();
@@ -106,25 +136,25 @@ public class MesaDAO {
     }
 
     public Mesa buscarMesaPorTipoYCapacidad(String tipoMesa, int numPersonas, Long idRestaurante) {
-    EntityManager em = emf.createEntityManager();
-    
-    try {
-        String jpql = "SELECT m FROM Mesa m WHERE m.tipoMesa = :tipoMesa AND m.capacidad >= :numPersonas AND m.restaurante.id = :idRestaurante";
-        TypedQuery<Mesa> query = em.createQuery(jpql, Mesa.class);
-        query.setParameter("tipoMesa", tipoMesa);
-        query.setParameter("numPersonas", numPersonas);
-        query.setParameter("idRestaurante", idRestaurante);
+        EntityManager em = emf.createEntityManager();
 
-        // Obtener la primera mesa disponible que cumpla con los criterios
-        return query.setMaxResults(1).getSingleResult(); // Retorna una mesa o lanza NoResultException si no se encuentra
-    } catch (NoResultException e) {
-        return null; // No se encontró ninguna mesa
-    } catch (Exception e) {
-        throw new RuntimeException("Error al buscar la mesa: " + e.getMessage(), e);
-    } finally {
-        em.close(); // Asegurarse de cerrar el EntityManager
+        try {
+            String jpql = "SELECT m FROM Mesa m WHERE m.tipoMesa = :tipoMesa AND m.capacidad >= :numPersonas AND m.restaurante.id = :idRestaurante";
+            TypedQuery<Mesa> query = em.createQuery(jpql, Mesa.class);
+            query.setParameter("tipoMesa", tipoMesa);
+            query.setParameter("numPersonas", numPersonas);
+            query.setParameter("idRestaurante", idRestaurante);
+
+            // Obtener la primera mesa disponible que cumpla con los criterios
+            return query.setMaxResults(1).getSingleResult(); // Retorna una mesa o lanza NoResultException si no se encuentra
+        } catch (NoResultException e) {
+            return null; // No se encontró ninguna mesa
+        } catch (Exception e) {
+            throw new RuntimeException("Error al buscar la mesa: " + e.getMessage(), e);
+        } finally {
+            em.close(); // Asegurarse de cerrar el EntityManager
+        }
     }
-}
 
     public List<Mesa> consultarMesasPorRestaurante(Long idRestaurante) {
         EntityManager em = emf.createEntityManager();
@@ -149,16 +179,16 @@ public class MesaDAO {
         }
         return mesas;
     }
-    
+
     public Restaurante obtenerRestaurantePorId(Long idRestaurante) {
-    EntityManager em = emf.createEntityManager();
-    
-    try {
-        return em.find(Restaurante.class, idRestaurante); // Devuelve el restaurante si existe
-    } catch (Exception e) {
-        throw new RuntimeException("Error al obtener el restaurante: " + e.getMessage(), e);
-    } finally {
-        em.close(); // Cerrar el EntityManager
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            return em.find(Restaurante.class, idRestaurante); // Devuelve el restaurante si existe
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener el restaurante: " + e.getMessage(), e);
+        } finally {
+            em.close(); // Cerrar el EntityManager
+        }
     }
-}
 }

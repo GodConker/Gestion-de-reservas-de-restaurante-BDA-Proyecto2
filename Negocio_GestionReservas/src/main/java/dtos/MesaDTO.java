@@ -14,7 +14,7 @@ public class MesaDTO {
     private String codigoMesa;
     private String tipoMesa;
     private int capacidad;
-    private String ubicacion;
+    private String ubicacion; 
     private int idRestaurante;
 
     public MesaDTO() {
@@ -25,8 +25,14 @@ public class MesaDTO {
         this.codigoMesa = codigoMesa;
         this.tipoMesa = tipoMesa;
         this.capacidad = capacidad;
-        this.ubicacion = ubicacion;
+        this.ubicacion = ubicacion; 
         this.idRestaurante = idRestaurante;
+    }
+    
+    public MesaDTO(String tipoMesa, int capacidad, String ubicacion) {
+        this.tipoMesa = tipoMesa;
+        this.capacidad = capacidad;
+        this.ubicacion = ubicacion; 
     }
 
     // Getters y Setters
@@ -62,11 +68,11 @@ public class MesaDTO {
         this.capacidad = capacidad;
     }
 
-    public String getUbicacion() {
+    public String getUbicacion() { // Cambiado a retornar Mesa.Ubicacion
         return ubicacion;
     }
 
-    public void setUbicacion(String ubicacion) {
+    public void setUbicacion(String ubicacion) { // Cambiado a aceptar Mesa.Ubicacion
         this.ubicacion = ubicacion;
     }
 
@@ -85,7 +91,7 @@ public class MesaDTO {
                 + ", codigoMesa='" + codigoMesa + '\''
                 + ", tipoMesa='" + tipoMesa + '\''
                 + ", capacidad=" + capacidad
-                + ", ubicacion='" + ubicacion + '\''
+                + ", ubicacion=" + ubicacion // Cambiado a mostrar el objeto Ubicacion
                 + ", idRestaurante=" + idRestaurante
                 + '}';
     }

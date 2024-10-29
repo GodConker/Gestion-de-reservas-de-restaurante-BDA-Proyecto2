@@ -4,6 +4,10 @@
  */
 package GUIs;
 
+import business.objects.ClienteBO;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Dell
@@ -32,7 +36,8 @@ public class frmMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnReportes = new javax.swing.JButton();
         btnConsultas = new javax.swing.JButton();
-        btnCancelacion = new javax.swing.JButton();
+        btnCancelacion1 = new javax.swing.JButton();
+        btnInserciónMasiva = new javax.swing.JButton();
         btnReservas = new javax.swing.JButton();
         btnMesas = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -70,16 +75,27 @@ public class frmMenu extends javax.swing.JFrame {
         });
         jPanel2.add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 120, -1, -1));
 
-        btnCancelacion.setText("Cancelación");
-        btnCancelacion.setBackground(new java.awt.Color(0, 0, 0));
-        btnCancelacion.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
-        btnCancelacion.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelacion.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelacion1.setBackground(new java.awt.Color(0, 0, 0));
+        btnCancelacion1.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
+        btnCancelacion1.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelacion1.setText("Cancelación");
+        btnCancelacion1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelacionActionPerformed(evt);
+                btnCancelacion1ActionPerformed(evt);
             }
         });
-        jPanel2.add(btnCancelacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 120, -1));
+        jPanel2.add(btnCancelacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 120, 120, -1));
+
+        btnInserciónMasiva.setBackground(new java.awt.Color(0, 0, 0));
+        btnInserciónMasiva.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
+        btnInserciónMasiva.setForeground(new java.awt.Color(255, 255, 255));
+        btnInserciónMasiva.setText("Inserción Masiva");
+        btnInserciónMasiva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserciónMasivaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnInserciónMasiva, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 170, -1));
 
         btnReservas.setBackground(new java.awt.Color(0, 0, 0));
         btnReservas.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
@@ -141,27 +157,35 @@ public class frmMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservasActionPerformed
-     frmReserva reservasFrame = new frmReserva(); // Crear instancia del frame de Reservas
-    reservasFrame.setVisible(true); // Mostrar el frame de Reservas
-    this.dispose(); // Cerrar el frame actual (opcional)
+        frmReserva reservasFrame = new frmReserva(); // Crear instancia del frame de Reservas
+        reservasFrame.setVisible(true); // Mostrar el frame de Reservas
+        this.dispose(); // Cerrar el frame actual (opcional)
     }//GEN-LAST:event_btnReservasActionPerformed
 
     private void btnMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMesasActionPerformed
         frmMesas mesasFrame = new frmMesas(); // Crear instancia del frame de Mesas
-    mesasFrame.setVisible(true); // Mostrar el frame de Mesas
-    this.dispose(); // Cerrar el frame actual (opcional)
+        mesasFrame.setVisible(true); // Mostrar el frame de Mesas
+        this.dispose(); // Cerrar el frame actual (opcional)
     }//GEN-LAST:event_btnMesasActionPerformed
 
-    private void btnCancelacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelacionActionPerformed
-        frmCancelacion cancelacionFrame = new frmCancelacion(); // Crear instancia del frame de Cancelación
-    cancelacionFrame.setVisible(true); // Mostrar el frame de Cancelación
-    this.dispose(); // Cerrar el frame actual (opcional)
-    }//GEN-LAST:event_btnCancelacionActionPerformed
+    private void btnInserciónMasivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserciónMasivaActionPerformed
+
+        // Crear una instancia de ClienteBO
+        ClienteBO clienteBO = new ClienteBO();
+
+        // Intentar insertar 20 clientes de ejemplo
+        try {
+            clienteBO.insercionMasivaClientes(); // Método que generará e insertará 20 clientes
+            JOptionPane.showMessageDialog(this, "20 clientes insertados exitosamente.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al insertar clientes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnInserciónMasivaActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
         frmConsultas consultasFrame = new frmConsultas(); // Crear instancia del frame de Consultas
-    consultasFrame.setVisible(true); // Mostrar el frame de Consultas
-    this.dispose(); // Cerrar el frame actual (opcional)
+        consultasFrame.setVisible(true); // Mostrar el frame de Consultas
+        this.dispose(); // Cerrar el frame actual (opcional)
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
@@ -169,6 +193,10 @@ public class frmMenu extends javax.swing.JFrame {
         reportesFrame.setVisible(true); // Mostrar el frame de Reportes
         this.dispose(); // Cerrar el frame actual (opcional)
     }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void btnCancelacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelacion1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelacion1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,8 +234,9 @@ public class frmMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelacion;
+    private javax.swing.JButton btnCancelacion1;
     private javax.swing.JButton btnConsultas;
+    private javax.swing.JButton btnInserciónMasiva;
     private javax.swing.JButton btnMesas;
     private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnReservas;

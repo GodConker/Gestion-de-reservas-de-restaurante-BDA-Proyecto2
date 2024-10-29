@@ -74,8 +74,8 @@ public class MesaBO {
     }
 
     // Método para buscar o crear una mesa
-    public Mesa buscarORegistrarMesa(String tipoMesa, int numPersonas, Long idRestaurante) {
-        // Aquí se asume que tienes que pasar también el id del restaurante.
+    public Mesa buscarORegistrarMesa(String tipoMesa, int numPersonas, Long idRestaurante, String ubicacion) {
+        // Buscar la mesa existente por tipo y capacidad
         Mesa mesa = mesaDAO.buscarMesaPorTipoYCapacidad(tipoMesa, numPersonas, idRestaurante);
 
         if (mesa == null) {
@@ -88,14 +88,14 @@ public class MesaBO {
             Restaurante restaurante = mesaDAO.obtenerRestaurantePorId(idRestaurante);
             mesa.setRestaurante(restaurante); // Asigna el restaurante
 
-            // Generar un código único para la mesa
-            String codigoMesa = mesaDAO.generarCodigoMesa(); // Asegúrate de que este método existe
+            // Generar un código único para la mesa usando la ubicación seleccionada
+            String codigoMesa = mesaDAO.generarCodigoMesa(ubicacion, numPersonas); // Aquí pasas la ubicación
             mesa.setCodigoMesa(codigoMesa); // Asignar el código único
 
             mesaDAO.agregarMesa(mesa); // Registrar la nueva mesa en la base de datos
         }
 
-        return mesa;
+        return mesa; // Retornar la mesa encontrada o creada
     }
 
     public String generarCodigoMesa() {

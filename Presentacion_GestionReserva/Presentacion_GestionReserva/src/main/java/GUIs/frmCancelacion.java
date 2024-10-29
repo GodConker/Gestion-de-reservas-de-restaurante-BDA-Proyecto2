@@ -4,8 +4,15 @@
  */
 package GUIs;
 // holaaaaaaaaaaaaaaaaaaaaa
+
+import business.objects.ReservaBO;
+import dtos.ReservaDTO;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
- * 
+ *
  * @author Dell
  */
 public class frmCancelacion extends javax.swing.JFrame {
@@ -16,9 +23,24 @@ public class frmCancelacion extends javax.swing.JFrame {
     public frmCancelacion() {
         initComponents();
         setLocationRelativeTo(null); // Esto centra la ventana
-        
-        // ejemplo para guardar, así?
 
+        // ejemplo para guardar, así?
+    }
+
+    private ReservaDTO reservaSeleccionada;
+
+    private void llenarTablaConReserva(ReservaDTO reservaDTO) {
+        DefaultTableModel model = (DefaultTableModel) TableReservacionCancelar.getModel();
+        model.setRowCount(0); // Limpiar filas anteriores
+
+        // Agregar una nueva fila con la información de la reserva
+        Object[] rowData = {
+            reservaDTO.getIdReserva(), // ID de reserva
+            reservaDTO.getNombreCliente(), // Nombre del cliente
+            reservaDTO.getFechaReserva(), // Fecha de reserva
+            reservaDTO.getEstadoReserva() // Estado de la reserva
+        };
+        model.addRow(rowData);
     }
 
     /**
@@ -111,6 +133,11 @@ public class frmCancelacion extends javax.swing.JFrame {
         BtnConfirmar.setBackground(new java.awt.Color(0, 0, 0));
         BtnConfirmar.setFont(new java.awt.Font("Champagne & Limousines", 1, 14)); // NOI18N
         BtnConfirmar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnConfirmarActionPerformed(evt);
+            }
+        });
         jPanel1.add(BtnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 100, -1));
 
         jLabel11.setText("Multa Calculada:");
@@ -119,7 +146,12 @@ public class frmCancelacion extends javax.swing.JFrame {
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, -1, -1));
 
         BtnBuscarReservacion1.setText("Buscar");
-        jPanel1.add(BtnBuscarReservacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, 80, -1));
+        BtnBuscarReservacion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarReservacion1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnBuscarReservacion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 80, -1));
 
         TableReservacionCancelar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,15 +175,20 @@ public class frmCancelacion extends javax.swing.JFrame {
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, 20));
 
         BtnBuscarReservacion.setText("Buscar");
-        jPanel1.add(BtnBuscarReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 80, -1));
-        jPanel1.add(TxtfBuscarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 220, -1));
-        jPanel1.add(DPBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 220, 20));
+        BtnBuscarReservacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarReservacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BtnBuscarReservacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 80, -1));
+        jPanel1.add(TxtfBuscarReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 102, 310, 30));
+        jPanel1.add(DPBuscarFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 140, 310, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,6 +213,80 @@ public class frmCancelacion extends javax.swing.JFrame {
 
         this.dispose();
     }//GEN-LAST:event_BtnHistorialActionPerformed
+
+    private void BtnBuscarReservacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarReservacionActionPerformed
+        // TODO add your handling code here:
+        String reservaIdStr = TxtfBuscarReserva.getText().trim();
+
+        // Validar que el ID de la reserva no esté vacío
+        if (reservaIdStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID de reserva", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return; // Salir del método si el ID es vacío
+        }
+
+        // Convertir el ID a int (suponiendo que idReserva es de tipo int)
+        int reservaId;
+        try {
+            reservaId = Integer.parseInt(reservaIdStr);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El ID de reserva debe ser un número válido", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Asumir que tienes una instancia de ReservaBO en algún lugar de tu clase
+        ReservaBO reservaBO = new ReservaBO();
+
+        try {
+            // Buscar la reserva por su ID usando la capa de negocio
+            ReservaDTO reservaDTO = reservaBO.buscarReservaPorId(reservaId);
+
+            if (reservaDTO != null) {
+                // Llenar la tabla con la información de la reserva
+                llenarTablaConReserva(reservaDTO); // Método que implementas para llenar la tabla
+
+                // Guarda la reserva seleccionada en un atributo de clase para usarla más adelante
+                this.reservaSeleccionada = reservaDTO; // O ajusta según tus necesidades
+            } else {
+                // Manejar el caso en que no se encuentra la reserva
+                JOptionPane.showMessageDialog(this, "Reserva no encontrada", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception e) {
+            // Manejar cualquier excepción que pueda surgir al buscar la reserva
+            JOptionPane.showMessageDialog(this, "Error al buscar la reserva: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_BtnBuscarReservacionActionPerformed
+
+    private void BtnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnConfirmarActionPerformed
+        // TODO add your handling code here:
+        // Obtener la reserva seleccionada de la tabla
+        int selectedRow = TableReservacionCancelar.getSelectedRow();
+        if (selectedRow != -1) {
+            // Obtener el ID de la reserva seleccionada y convertirlo a Long
+            Integer idReservaInt = (Integer) TableReservacionCancelar.getValueAt(selectedRow, 0); // Cambia el índice según la columna de ID
+            Long idReserva = idReservaInt.longValue(); // Convertir a Long
+
+            Date fechaCancelacion = new Date(); // O la fecha que desees usar para la cancelación
+
+            // Crear instancia de ReservaBO
+            ReservaBO reservaBO = new ReservaBO();
+
+            try {
+                // Llama al método de cancelación en la clase BO
+                double multa = reservaBO.cancelarReserva(idReserva, fechaCancelacion);
+                JOptionPane.showMessageDialog(this, "Reserva cancelada exitosamente. Multa: " + multa);
+                // Actualiza la tabla o realiza otras acciones necesarias
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al cancelar la reserva: " + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona una reserva.");
+        }
+    }//GEN-LAST:event_BtnConfirmarActionPerformed
+
+    private void BtnBuscarReservacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarReservacion1ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_BtnBuscarReservacion1ActionPerformed
 
     /**
      * @param args the command line arguments

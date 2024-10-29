@@ -31,6 +31,15 @@ public class Mesa implements Serializable {
     @Column(name = "tipo_mesa")
     private String tipoMesa;
 
+    public enum Ubicacion {
+        General,
+        Ventana,
+        Terraza
+    }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ubicacion")
+    private Ubicacion ubicacion;
+
     // Getters y Setters
     public Long getId() {
         return id;
@@ -82,6 +91,22 @@ public class Mesa implements Serializable {
             throw new IllegalArgumentException("La capacidad debe ser mayor que cero.");
         }
         this.capacidad = capacidad;
+    }
+
+    public String getTipoMesa() {
+        return tipoMesa;
+    }
+
+    public void setTipoMesa(String tipoMesa) {
+        this.tipoMesa = tipoMesa;
+    }
+
+    public Ubicacion getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(Ubicacion ubicacion) {
+        this.ubicacion = ubicacion;
     }
 
     @Override
